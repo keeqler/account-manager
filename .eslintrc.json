@@ -9,7 +9,6 @@
     "class-methods-use-this": "off",
     "no-param-reassign": "off",
     "camelcase": "off",
-    "import/no-unresolved": "off",
     "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
   }
 }
