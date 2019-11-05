@@ -34,7 +34,7 @@
     "sequelize": "^5.21.2"
   },
   "scripts": {
-    "dev": "NODE_ENV=development nodemon ./src/index.js",
+    "dev": "NODE_ENV=development nodemon --exec sucrase-node ./src/index.js",
     "start": "NODE_ENV=production node index.js"
   }
 }
