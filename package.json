@@ -28,13 +28,17 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "link-module-alias": "^1.2.0",
     "morgan": "^1.9.1",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.2"
   },
   "scripts": {
-    "dev": "NODE_ENV=development nodemon --exec sucrase-node ./src/index.js",
-    "start": "NODE_ENV=production node index.js"
+    "dev": "link-module-alias && NODE_ENV=development NODE_PATH='src/' nodemon --exec sucrase-node ./src/index.js",
+    "start": "link-module-alias && NODE_ENV=production node index.js"
+  },
+  "_moduleAliases": {
+    "#": "src/"
   }
 }
