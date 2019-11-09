@@ -43,6 +43,7 @@
     "@src": "src/",
     "@config": "src/config/",
     "@database": "src/database/",
-    "@models": "src/models/"
+    "@models": "src/models/",
+    "@controllers": "src/controllers/"
   }
 }
