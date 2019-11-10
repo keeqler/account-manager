@@ -45,6 +45,7 @@
     "@config": "src/config/",
     "@database": "src/database/",
     "@models": "src/app/models/",
-    "@controllers": "src/app/controllers/"
+    "@controllers": "src/app/controllers/",
+    "@middlewares": "src/app/middlewares/"
   }
 }
