@@ -44,7 +44,7 @@
     "@src": "src/",
     "@config": "src/config/",
     "@database": "src/database/",
-    "@models": "src/models/",
-    "@controllers": "src/controllers/"
+    "@models": "src/app/models/",
+    "@controllers": "src/app/controllers/"
   }
 }
