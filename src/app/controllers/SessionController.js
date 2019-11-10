@@ -21,9 +21,8 @@ class SessionController {
     return res.send({
       user: {
         id: user.id,
-        email,
       },
-      token: jwt.sign({ id: user.id, email }, process.env.JWT_SECRET, {
+      token: jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRY,
       }),
     });
