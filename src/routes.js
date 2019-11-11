@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import authMiddleware from '@middlewares/auth';
+import authMiddleware from '@/app/middlewares/auth';
 
-import UserController from '@controllers/UserController';
-import SessionController from '@controllers/SessionController';
+import UserController from '@/app/controllers/UserController';
+import SessionController from '@/app/controllers/SessionController';
 
 const router = new Router();
 

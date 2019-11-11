@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-import User from '@models/User';
+import User from '@/app/models/User';
 
 class UserController {
   async store(req, res) {

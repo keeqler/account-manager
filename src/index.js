@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import 'module-alias/register';
 
-import app from '@src/app';
+import app from '@/app';
 
 app.listen(process.env.SERVER_PORT);
