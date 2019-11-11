@@ -37,15 +37,10 @@
     "sequelize": "^5.21.2"
   },
   "scripts": {
-    "dev": "NODE_ENV=development NODE_PATH=src/ nodemon --exec sucrase-node ./src/index.js",
-    "start": "NODE_ENV=production NODE_PATH=src/ node index.js"
+    "dev": "NODE_ENV=development nodemon --exec sucrase-node ./src/index.js",
+    "start": "NODE_ENV=production node ./src/index.js"
   },
   "_moduleAliases": {
-    "@src": "src/",
-    "@config": "src/config/",
-    "@database": "src/database/",
-    "@models": "src/app/models/",
-    "@controllers": "src/app/controllers/",
-    "@middlewares": "src/app/middlewares/"
+    "@": "src/"
   }
 }
