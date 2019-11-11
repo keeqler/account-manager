@@ -18,22 +18,22 @@ class UserController {
   }
 
   async update(req, res) {
-    const { password, email, newPassword } = req.body;
+    const { password, newEmail, newPassword } = req.body;
 
     const user = await User.findByPk(req.userId);
 
     if (!(await user.checkPassword(password)))
       return res.status(400).send({ error: 'Password does not match.' });
 
-    if (email && email !== user.email) {
+    if (newEmail && newEmail !== user.email) {
       const emailTaken = await User.findOne({
-        where: { email },
+        where: { email: newEmail },
       });
 
       if (emailTaken)
         return res.status(400).send({ error: 'E-mail already taken.' });
 
-      user.email = email;
+      user.email = newEmail;
     }
     if (newPassword) user.password = await bcrypt.hash(newPassword, 10);
 
