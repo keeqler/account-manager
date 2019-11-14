@@ -1,10 +1,8 @@
 import * as Yup from 'yup';
 
-import verifyValidation from '@/app/utils/verifyValidation';
-
 export default {
   async validateStore(req, res, next) {
-    req.schema = Yup.object().shape({
+    req.bodySchema = Yup.object().shape({
       email: Yup.string()
         .email()
         .required(),
@@ -13,11 +11,11 @@ export default {
         .required(),
     });
 
-    verifyValidation(req, res, next);
+    next();
   },
 
   async validateUpdate(req, res, next) {
-    req.schema = Yup.object().shape({
+    req.bodySchema = Yup.object().shape({
       password: Yup.string()
         .min(8)
         .required(),
@@ -29,6 +27,6 @@ export default {
       newPassword: Yup.string().min(8),
     });
 
-    verifyValidation(req, res, next);
+    next();
   },
 };
