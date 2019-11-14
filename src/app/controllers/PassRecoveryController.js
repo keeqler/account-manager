@@ -45,8 +45,7 @@ class PassRecoveryController {
     switch (tokenValidation) {
       case 'TOKEN_NONEXISTENT':
         return res.status(400).send({
-          error:
-            'Token does not exist, please request a password recovery token first.',
+          error: 'Please request a password recovery token first.',
         });
 
       case 'TOKEN_INVALID':
