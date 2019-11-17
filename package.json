@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "bee-queue": "^1.2.2",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -39,8 +40,9 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "dev": "NODE_ENV=development nodemon --exec sucrase-node ./src/index.js",
-    "start": "NODE_ENV=production node ./src/index.js"
+    "dev": "NODE_ENV=development nodemon ./src/index.js",
+    "start": "NODE_ENV=production nodemon ./src/index.js",
+    "start-queue": "NODE_ENV=production nodemon ./src/queue.js"
   },
   "_moduleAliases": {
     "@": "src/"

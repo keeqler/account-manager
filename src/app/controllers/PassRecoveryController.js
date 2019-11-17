@@ -3,7 +3,8 @@ import crypto from 'crypto';
 
 import User from '@/app/models/User';
 
-import Mailer from '@/lib/Mailer';
+import Queue from '@/lib/Queue';
+import PassRecoveryMail from '@/app/jobs/PassRecoveryMail';
 
 class PassRecoveryController {
   async store(req, res) {
@@ -17,11 +18,7 @@ class PassRecoveryController {
       .toUpperCase();
     const hash = await bcrypt.hash(token, 10);
 
-    await Mailer.sendMail({
-      to: `${user.email.split('@')[0]} <${user.email}>`,
-      subject: 'Account Manager password recovery token',
-      text: token,
-    });
+    await Queue.add(PassRecoveryMail.key, { email: user.email, token });
 
     user.password_recovery_token = hash;
     user.password_recovery_expiry = new Date(
