@@ -4,17 +4,23 @@ import User from '@/app/models/User';
 
 class UserController {
   async store(req, res) {
-    const emailTaken = await User.findOne({ where: { email: req.body.email } });
+    const { email, password } = req.body;
+    const emailTaken = await User.findOne({ where: { email } });
 
     if (emailTaken)
       return res.status(400).json({ error: 'E-mail already taken.' });
 
-    const user = await User.create({
-      ...req.body,
-      password: await bcrypt.hash(req.body.password, 10),
+    const { dataValues: user } = await User.create({
+      email,
+      password: await bcrypt.hash(password, 10),
     });
 
-    return res.status(201).send({ ...user.dataValues, password: undefined });
+    return res.status(201).send({
+      ...user,
+      password: undefined,
+      password_recovery_token: undefined,
+      password_recovery_expiry: undefined,
+    });
   }
 
   async update(req, res) {
@@ -39,7 +45,7 @@ class UserController {
 
     await user.save();
 
-    return res.send({ ...user.dataValues, password: undefined });
+    return res.sendStatus(204);
   }
 }
 
