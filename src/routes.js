@@ -1,46 +1,41 @@
 import { Router } from 'express';
 
 import authMiddleware from '@/app/middlewares/auth';
-import validatorMiddleware from '@/app/middlewares/validator';
+
+import validate from '@/lib/validateRequest';
 
 import UserValidation from '@/app/validation/UserValidation';
 import SessionValidation from '@/app/validation/SessionValidation';
+import PassRecoveryValidation from '@/app/validation/PassRecoveryValidation';
+import AccountValidation from '@/app/validation/AccountValidation';
 
 import UserController from '@/app/controllers/UserController';
 import SessionController from '@/app/controllers/SessionController';
 import PassRecoveryController from '@/app/controllers/PassRecoveryController';
-import PassRecoveryValidation from './app/validation/PassRecoveryValidation';
+import AccountController from '@/app/controllers/AccountController';
 
 const router = new Router();
 
 // --- No auth routes
 // /users
-router.post(
-  '/users',
-  UserValidation.validateStore,
-  validatorMiddleware,
-  UserController.store
-);
+router.post('/users', validate(UserValidation.store), UserController.store);
 
 // /sessions
 router.post(
   '/sessions',
-  SessionValidation.validateStore,
-  validatorMiddleware,
+  validate(SessionValidation.store),
   SessionController.store
 );
 
 // /password_recovery
 router.post(
   '/password_recovery/:email',
-  PassRecoveryValidation.validateStore,
-  validatorMiddleware,
+  validate(PassRecoveryValidation.store),
   PassRecoveryController.store
 );
 router.put(
   '/password_recovery/:email',
-  PassRecoveryValidation.validateUpdate,
-  validatorMiddleware,
+  validate(PassRecoveryValidation.update),
   PassRecoveryController.update
 );
 
@@ -48,11 +43,25 @@ router.put(
 router.use(authMiddleware);
 
 // /users
-router.put(
-  '/users',
-  UserValidation.validateUpdate,
-  validatorMiddleware,
-  UserController.update
+router.put('/users', validate(UserValidation.update), UserController.update);
+
+// /accounts
+router.post(
+  '/accounts',
+  validate(AccountValidation.store),
+  AccountController.store
+);
+router.get(
+  '/accounts',
+  validate(AccountValidation.index),
+  AccountController.index
+);
+router.get('/accounts/:id', AccountController.show);
+router.put('/accounts/:id', AccountController.update);
+router.delete(
+  '/accounts/:id',
+  validate(AccountValidation.update),
+  AccountController.delete
 );
 
 export default router;
