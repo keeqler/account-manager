@@ -1,21 +1,19 @@
 import * as Yup from 'yup';
 
 export default {
-  async validateStore(req, res, next) {
-    req.bodySchema = Yup.object().shape({
+  store: {
+    body: Yup.object().shape({
       email: Yup.string()
         .email()
         .required(),
       password: Yup.string()
         .min(8)
         .required(),
-    });
-
-    next();
+    }),
   },
 
-  async validateUpdate(req, res, next) {
-    req.bodySchema = Yup.object().shape({
+  update: {
+    body: Yup.object().shape({
       password: Yup.string()
         .min(8)
         .required(),
@@ -25,8 +23,6 @@ export default {
           newPassword ? field : field.required()
         ),
       newPassword: Yup.string().min(8),
-    });
-
-    next();
+    }),
   },
 };
