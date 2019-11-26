@@ -11,10 +11,18 @@ export default class extends Model {
         password_recovery_expiry: Sequelize.DATE,
       },
       {
-        modelName: 'user',
+        modelName: 'User',
         sequelize,
       }
     );
+  }
+
+  static associate(models) {
+    this.hasMany(models.Account, {
+      as: 'accounts',
+      onDelete: 'CASCADE',
+      foreignKey: 'user_id',
+    });
   }
 
   checkPassword(password) {
