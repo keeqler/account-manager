@@ -10,7 +10,7 @@ class PassRecoveryController {
   async store(req, res) {
     const user = await User.findOne({ where: { email: req.params.email } });
 
-    if (!user) return res.send();
+    if (!user) return res.sendStatus(204);
 
     const token = crypto
       .randomBytes(6)
@@ -27,7 +27,7 @@ class PassRecoveryController {
 
     await user.save();
 
-    return res.send();
+    return res.sendStatus(204);
   }
 
   async update(req, res) {
@@ -59,7 +59,7 @@ class PassRecoveryController {
 
     await user.save();
 
-    return res.send();
+    return res.sendStatus(204);
   }
 }
 

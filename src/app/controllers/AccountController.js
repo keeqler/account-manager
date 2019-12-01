@@ -12,9 +12,15 @@ class AccountController {
       twofa_secret,
     });
 
-    return res
-      .status(201)
-      .send({ ...account, password: undefined, twofa_secret: undefined });
+    return res.status(201).send({
+      ...account,
+      user_id: undefined,
+      UserId: undefined,
+      password: undefined,
+      twofa_secret: undefined,
+      created_at: undefined,
+      updated_at: undefined,
+    });
   }
 
   async index(req, res) {
@@ -36,9 +42,10 @@ class AccountController {
       where: { id: req.params.id, user_id: req.userId },
     });
 
-    if (account) return res.send(account);
+    if (!account)
+      return res.status(400).send({ error: 'Account does not exist.' });
 
-    return res.status(400).send({ error: 'Account does not exist.' });
+    return res.send({ ...account, user_id: undefined });
   }
 
   async update(req, res) {
@@ -59,9 +66,10 @@ class AccountController {
       where: { id: req.params.id, user_id: req.userId },
     });
 
-    if (deleted) return res.sendStatus(204);
+    if (!deleted)
+      return res.status(400).send({ error: 'Account does not exist.' });
 
-    return res.status(400).send({ error: 'Account does not exist.' });
+    return res.sendStatus(204);
   }
 }
 

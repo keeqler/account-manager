@@ -10,17 +10,12 @@ class UserController {
     if (emailTaken)
       return res.status(400).json({ error: 'E-mail already taken.' });
 
-    const { dataValues: user } = await User.create({
+    await User.create({
       email,
       password: await bcrypt.hash(password, 10),
     });
 
-    return res.status(201).send({
-      ...user,
-      password: undefined,
-      password_recovery_token: undefined,
-      password_recovery_expiry: undefined,
-    });
+    return res.sendStatus(204);
   }
 
   async update(req, res) {
