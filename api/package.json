@@ -1,18 +1,18 @@
 {
-  "name": "account-manager-backend",
+  "name": "account-manager",
   "version": "1.0.0",
-  "description": "Backend for AccountManager web app.",
+  "description": "🗃 An account managing service using (for learning purposes only)",
   "main": "./src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Keepler/account-manager-backend.git"
+    "url": "git+https://github.com/Keepler/account-manager.git"
   },
   "author": "Artur",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Keepler/account-manager-backend/issues"
+    "url": "https://github.com/Keepler/account-manager/issues"
   },
-  "homepage": "https://github.com/Keepler/account-manager-backend#readme",
+  "homepage": "https://github.com/Keepler/account-manager#readme",
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
