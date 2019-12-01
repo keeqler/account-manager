@@ -12,15 +12,16 @@ class App {
   constructor() {
     this.server = express();
 
-    Sentry.init({ dsn: process.env.SENTRY_DSN });
+    if (process.env.NODE_ENV === 'production')
+      Sentry.init({ dsn: process.env.SENTRY_DSN });
 
     this.middlewares();
     this.routes();
-    this.exceptionHandlers();
+
+    if (process.env.NODE_ENV === 'production') this.exceptionHandlers();
   }
 
   middlewares() {
-    this.server.use(Sentry.Handlers.requestHandler());
     this.server.use(morgan('dev'));
     this.server.use(cors());
     this.server.use(express.json());
@@ -32,9 +33,7 @@ class App {
 
   exceptionHandlers() {
     this.server.use(Sentry.Handlers.errorHandler());
-
-    if (process.env.NODE_ENV === 'production')
-      this.server.use(async (err, req, res, next) => res.status(500).send());
+    this.server.use(async (err, req, res, next) => res.status(500).send());
   }
 }
 
