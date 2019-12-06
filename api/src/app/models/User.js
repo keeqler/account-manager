@@ -30,14 +30,14 @@ export default class extends Model {
   }
 
   checkToken(token) {
-    if (!this.password_recovery_token) return 'TOKEN_NONEXISTENT';
+    if (!this.password_recovery_token) return 'nonexistentToken';
 
     const expiry = new Date(this.password_recovery_expiry);
 
-    if (expiry.getTime() < new Date().getTime()) return 'TOKEN_EXPIRED';
+    if (expiry.getTime() < new Date().getTime()) return 'expiredToken';
     if (!bcrypt.compare(token, this.password_recovery_token))
-      return 'TOKEN_INVALID';
+      return 'invalidToken';
 
-    return 'TOKEN_VALID';
+    return 'validToken';
   }
 }
