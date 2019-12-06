@@ -34,6 +34,8 @@ class PassRecoveryController {
     const { token, password } = req.body;
     const user = await User.findOne({ where: { email: req.params.email } });
 
+    if (!user) return res.sendStatus(204);
+
     const tokenValidation = await user.checkToken(token);
 
     user.password_recovery_token = null;

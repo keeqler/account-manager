@@ -45,7 +45,11 @@ class AccountController {
     if (!account)
       return res.status(400).send({ error: 'Account does not exist.' });
 
-    return res.send({ ...account, user_id: undefined });
+    return res.send({
+      ...account.dataValues,
+      user_id: undefined,
+      UserId: undefined,
+    });
   }
 
   async update(req, res) {
