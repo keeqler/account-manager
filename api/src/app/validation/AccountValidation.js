@@ -1,27 +1,53 @@
-import * as Yup from 'yup';
+import { body, param, query } from 'express-validator';
 
 export default {
-  store: {
-    body: Yup.object().shape({
-      label: Yup.string(),
-      service: Yup.string().required(),
-      username: Yup.string().required(),
-      password: Yup.string().required(),
-      twofa_secret: Yup.string().min(16),
-    }),
-  },
+  store: [
+    body(['label', 'twofa_secret'])
+      .optional()
+      .notEmpty()
+      .withMessage('Value must be provided.')
+      .isString()
+      .withMessage('Value type must be string.'),
+    body(['service', 'username', 'password'])
+      .notEmpty()
+      .withMessage('Value must be provided.')
+      .isString()
+      .withMessage('Value type must be string.'),
+    body('twofa_secret')
+      .optional()
+      .isLength({ min: 16 })
+      .withMessage('Length must be at least 16 characters long.'),
+  ],
 
-  index: {
-    query: Yup.object().shape({ page: Yup.number().min(1) }),
-  },
+  index: [
+    query('page')
+      .isInt({ min: 1 })
+      .withMessage('Value must be an integer greater than 0.'),
+  ],
 
-  update: {
-    body: Yup.object().shape({
-      label: Yup.string(),
-      service: Yup.string(),
-      username: Yup.string(),
-      password: Yup.string(),
-      twofa_secret: Yup.string().min(16),
-    }),
-  },
+  show: [
+    param('id')
+      .isInt({ min: 1 })
+      .withMessage('Value must be an integer greater than 0.'),
+  ],
+
+  update: [
+    body(['label', 'service', 'username', 'password', 'twofa_secret'])
+      .custom((value, { req }) => Object.keys(req.body).length)
+      .withMessage('At least one value must be provided.'),
+    body(['label', 'service', 'username', 'password', 'twofa_secret'])
+      .optional()
+      .isString()
+      .withMessage('Value type must be string.'),
+    body('twofa_secret')
+      .optional()
+      .isLength({ min: 16 })
+      .withMessage('Length must be at least 16 characters long.'),
+  ],
+
+  delete: [
+    param('id')
+      .isInt({ min: 1 })
+      .withMessage('Value must be an integer greater than 0.'),
+  ],
 };

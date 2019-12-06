@@ -1,28 +1,31 @@
-import * as Yup from 'yup';
+import { body, param } from 'express-validator';
 
 export default {
-  store: {
-    params: Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required(),
-    }),
-  },
+  store: [
+    param('email')
+      .isString()
+      .withMessage('Value type must be string.')
+      .isEmail()
+      .withMessage('Value must be an e-mail address.'),
+  ],
 
-  update: {
-    params: Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required(),
-    }),
+  update: [
+    param('email')
+      .isString()
+      .withMessage('Value type must be string.')
+      .isEmail()
+      .withMessage('Value must be an e-mail address.'),
 
-    body: Yup.object().shape({
-      token: Yup.string()
-        .length(12)
-        .required(),
-      password: Yup.string()
-        .min(8)
-        .required(),
-    }),
-  },
+    body(['token', 'password'])
+      .notEmpty()
+      .withMessage('Value must be provided.')
+      .isString()
+      .withMessage('Value type must be string.'),
+    body('token')
+      .isLength({ min: 12, max: 12 })
+      .withMessage('Value must be 12 characters long.'),
+    body('password')
+      .isLength({ min: 8 })
+      .withMessage('Value must be at least 8 characters long.'),
+  ],
 };

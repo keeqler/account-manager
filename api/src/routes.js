@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import authMiddleware from '@/app/middlewares/auth';
 
-import validate from '@/lib/validateRequest';
+import validation from '@/app/middlewares/validation';
 
 import UserValidation from '@/app/validation/UserValidation';
 import SessionValidation from '@/app/validation/SessionValidation';
@@ -18,24 +18,27 @@ const router = new Router();
 
 // --- No auth routes
 // /users
-router.post('/users', validate(UserValidation.store), UserController.store);
+router.post('/users', UserValidation.store, validation, UserController.store);
 
 // /sessions
 router.post(
   '/sessions',
-  validate(SessionValidation.store),
+  SessionValidation.store,
+  validation,
   SessionController.store
 );
 
 // /password_recovery
 router.post(
   '/password_recovery/:email',
-  validate(PassRecoveryValidation.store),
+  PassRecoveryValidation.store,
+  validation,
   PassRecoveryController.store
 );
 router.put(
   '/password_recovery/:email',
-  validate(PassRecoveryValidation.update),
+  PassRecoveryValidation.update,
+  validation,
   PassRecoveryController.update
 );
 
@@ -43,24 +46,37 @@ router.put(
 router.use(authMiddleware);
 
 // /users
-router.put('/users', validate(UserValidation.update), UserController.update);
+router.put('/users', UserValidation.update, validation, UserController.update);
 
 // /accounts
 router.post(
   '/accounts',
-  validate(AccountValidation.store),
+  AccountValidation.store,
+  validation,
   AccountController.store
 );
 router.get(
   '/accounts',
-  validate(AccountValidation.index),
+  AccountValidation.index,
+  validation,
   AccountController.index
 );
-router.get('/accounts/:id', AccountController.show);
-router.put('/accounts/:id', AccountController.update);
+router.get(
+  '/accounts/:id',
+  AccountValidation.show,
+  validation,
+  AccountController.show
+);
+router.put(
+  '/accounts/:id',
+  AccountValidation.update,
+  validation,
+  AccountController.update
+);
 router.delete(
   '/accounts/:id',
-  validate(AccountValidation.update),
+  AccountValidation.delete,
+  validation,
   AccountController.delete
 );
 
