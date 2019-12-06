@@ -36,25 +36,33 @@ class PassRecoveryController {
 
     if (!user) return res.sendStatus(204);
 
-    const tokenValidation = await user.checkToken(token);
+    const tokenValidationResult = await user.checkToken(token);
 
     user.password_recovery_token = null;
     user.password_recovery_expiry = null;
 
-    switch (tokenValidation) {
-      case 'TOKEN_NONEXISTENT':
-        return res.status(400).send({
-          error: 'Please request a password recovery token first.',
-        });
+    if (tokenValidationResult !== 'tokenValid') {
+      let msg;
 
-      case 'TOKEN_INVALID':
-        return res.status(400).send({ error: 'Invalid token.' });
+      // eslint-disable-next-line default-case
+      switch (tokenValidationResult) {
+        case 'nonexistentToken':
+          msg = 'Please request a password recovery token first.';
+          break;
+        case 'invalidToken':
+          msg = 'Invalid token.';
+          break;
+        case 'expiredToken':
+          msg = 'Expired token.';
+          break;
+      }
 
-      case 'TOKEN_EXPIRED':
-        await user.save();
-        return res.status(400).send({ error: 'Expired token.' });
-
-      default: // do nothing
+      return res.status(400).send({
+        error: {
+          code: tokenValidationResult,
+          msg,
+        },
+      });
     }
 
     user.password = await bcrypt.hash(password, 10);

@@ -10,7 +10,12 @@ class SessionController {
     if (!user || !(await user.checkPassword(password)))
       return res
         .status(400)
-        .send({ error: 'Wrong e-mail address or password.' });
+        .send({
+          error: {
+            code: 'invalidData',
+            msg: 'Wrong e-mail address or password.',
+          },
+        });
 
     return res.status(201).send({
       user: {

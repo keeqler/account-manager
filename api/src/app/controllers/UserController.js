@@ -8,7 +8,9 @@ class UserController {
     const emailTaken = await User.findOne({ where: { email } });
 
     if (emailTaken)
-      return res.status(400).json({ error: 'E-mail already taken.' });
+      return res
+        .status(400)
+        .json({ error: { code: 'emailTaken', msg: 'E-mail already taken.' } });
 
     await User.create({
       email,
@@ -24,7 +26,9 @@ class UserController {
     const user = await User.findByPk(req.userId);
 
     if (!(await user.checkPassword(password)))
-      return res.status(400).send({ error: 'Password does not match.' });
+      return res
+        .status(400)
+        .send({ error: { code: 'wrongPassword', msg: 'Wrong password.' } });
 
     if (newEmail && newEmail !== user.email) {
       const emailTaken = await User.findOne({
@@ -32,7 +36,11 @@ class UserController {
       });
 
       if (emailTaken)
-        return res.status(400).send({ error: 'E-mail already taken.' });
+        return res
+          .status(400)
+          .send({
+            error: { code: 'emailTaken', msg: 'E-mail already taken.' },
+          });
 
       user.email = newEmail;
     }

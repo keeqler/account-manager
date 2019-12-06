@@ -43,7 +43,9 @@ class AccountController {
     });
 
     if (!account)
-      return res.status(400).send({ error: 'Account does not exist.' });
+      return res.status(400).send({
+        error: { code: 'nonexistentAccount', msg: 'Account does not exist.' },
+      });
 
     return res.send({
       ...account.dataValues,
@@ -60,7 +62,9 @@ class AccountController {
     );
 
     if (!updated)
-      return res.status(400).send({ error: 'Account does not exist.' });
+      return res.status(400).send({
+        error: { code: 'nonexistentAccount', msg: 'Account does not exist.' },
+      });
 
     return res.sendStatus(204);
   }
@@ -71,7 +75,9 @@ class AccountController {
     });
 
     if (!deleted)
-      return res.status(400).send({ error: 'Account does not exist.' });
+      return res.status(400).send({
+        error: { code: 'nonexistentAccount', msg: 'Account does not exist.' },
+      });
 
     return res.sendStatus(204);
   }
