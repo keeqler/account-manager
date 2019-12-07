@@ -8,22 +8,24 @@ class SessionController {
     const user = await User.findOne({ where: { email } });
 
     if (!user || !(await user.checkPassword(password)))
-      return res
-        .status(400)
-        .send({
-          error: {
-            code: 'invalidData',
-            msg: 'Wrong e-mail address or password.',
-          },
-        });
+      return res.status(400).send({
+        error: {
+          code: 'invalidData',
+          msg: 'Wrong e-mail address or password.',
+        },
+      });
 
     return res.status(201).send({
       user: {
         id: user.id,
       },
-      token: jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRY,
-      }),
+      token: jwt.sign(
+        { id: user.id, createdAt: new Date().getTime() },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: process.env.JWT_EXPIRY,
+        }
+      ),
     });
   }
 }

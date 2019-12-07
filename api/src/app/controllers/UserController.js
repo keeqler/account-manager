@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt';
 
 import User from '@/app/models/User';
 
+import RedisClient from '@/lib/RedisClient';
+
 class UserController {
   async store(req, res) {
     const { email, password } = req.body;
@@ -36,17 +38,21 @@ class UserController {
       });
 
       if (emailTaken)
-        return res
-          .status(400)
-          .send({
-            error: { code: 'emailTaken', msg: 'E-mail already taken.' },
-          });
+        return res.status(400).send({
+          error: { code: 'emailTaken', msg: 'E-mail already taken.' },
+        });
 
       user.email = newEmail;
     }
+
     if (newPassword) user.password = await bcrypt.hash(newPassword, 10);
 
     await user.save();
+    await RedisClient.hsetAsync(
+      'jwtValidationTimestamp',
+      user.id,
+      new Date().getTime()
+    );
 
     return res.sendStatus(204);
   }
