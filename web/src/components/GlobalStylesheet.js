@@ -8,7 +8,7 @@ export default createGlobalStyle`
     --primary: #566da5;
     --neutral-1: #fff;
     --neutral-2: #d8d8d8;
-    --background-1: #020409;
+    --background-1: #0d0d11;
     --background-2: #1e1e23;
   }
 
