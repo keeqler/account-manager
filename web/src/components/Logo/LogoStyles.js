@@ -11,11 +11,18 @@ export default styled.div`
   }
 
   div {
-    font-size: 18px;
+    display: none;
+  }
 
-    span {
-      font-weight: 300;
-      color: var(--neutral-2);
+  @media only screen and (min-width: 540px) {
+    div {
+      display: block;
+      font-size: 18px;
+
+      span {
+        font-weight: 300;
+        color: var(--neutral-2);
+      }
     }
   }
 `;
