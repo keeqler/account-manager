@@ -6,12 +6,12 @@ export default styled.div`
   align-items: center;
 
   img {
-    height: 46px;
+    height: 40px;
     margin-right: 10px;
   }
 
   div {
-    font-size: 20px;
+    font-size: 18px;
 
     span {
       font-weight: 300;
