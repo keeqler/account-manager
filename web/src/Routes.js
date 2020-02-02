@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route as StdRoute } from 'react-router-dom';
 
 import Route from '~/components/Route';
 
@@ -20,6 +20,6 @@ export default () => (
     <Route path="/forgotpassword" component={ForgotPassword} />
     <Route path="/dashboard" component={Dashboard} isPrivate />
 
-    <Route path="/" component={NotFound} />
+    <StdRoute path="/" component={NotFound} />
   </Switch>
 );
