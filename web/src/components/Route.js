@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-import NoAuthLayout from '~/components/_layouts/NoAuth/NoAuth';
-import AuthLayout from '~/components/_layouts/Auth/Auth';
+import NoAuthLayout from '~/components/_layouts/NoAuthLayout/NoAuthLayout';
+import AuthLayout from '~/components/_layouts/AuthLayout/AuthLayout';
 
 export default function RouteWrapper({
   component: Component,
