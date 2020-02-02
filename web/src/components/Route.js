@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
+import NoAuthLayout from '~/components/_layouts/NoAuth/NoAuth';
+import AuthLayout from '~/components/_layouts/Auth/Auth';
+
 export default function RouteWrapper({
   component: Component,
   path,
@@ -9,12 +12,24 @@ export default function RouteWrapper({
   isPrivate,
 }) {
   // this will be static for now
-  const signed = false;
+  const signed = true;
 
   if (!signed && isPrivate) return <Redirect to="/" />;
   if (signed && !isPrivate) return <Redirect to="/dashboard" />;
 
-  return <Route path={path} exact={exact} component={Component} />;
+  const Layout = signed ? AuthLayout : NoAuthLayout;
+
+  return (
+    <Route
+      path={path}
+      exact={exact}
+      render={({ history, location, match }) => (
+        <Layout>
+          <Component history={history} location={location} match={match} />
+        </Layout>
+      )}
+    />
+  );
 }
 
 RouteWrapper.propTypes = {
