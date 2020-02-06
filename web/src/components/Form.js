@@ -16,7 +16,7 @@ export default styled(Form)`
   }
 
   .submit {
-    margin-top: 24px;
+    margin-top: 12px;
   }
 
   .request-message {
