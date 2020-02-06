@@ -5,5 +5,9 @@ export default styled.div`
     .text-input.password {
       margin-bottom: 4px;
     }
+
+    .submit {
+      margin-top: 24px;
+    }
   }
 `;
