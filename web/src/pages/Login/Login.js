@@ -21,10 +21,10 @@ export default () => {
   const schema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid e-mail address')
-      .required('Invalid e-mail address'),
+      .required('This field is required'),
     password: Yup.string()
       .min(8, 'Invalid password')
-      .required('Invalid password'),
+      .required('This field is required'),
   });
 
   return (
