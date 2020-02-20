@@ -7,6 +7,7 @@ import Route from '~/components/Route';
 import Login from '~/pages/Login/Login';
 import Register from '~/pages/Register/Register';
 import ForgotPassword from '~/pages/ForgotPassword/ForgotPassword';
+import PasswordReset from '~/pages/PasswordReset/PasswordReset';
 import NotFound from '~/pages/NotFound/NotFound';
 
 // Authenticated pages
@@ -16,8 +17,9 @@ export default () => (
   <Switch>
     <Route path="/" exact component={Login} />
     <Route path="/register" component={Register} />
-
     <Route path="/forgotpassword" component={ForgotPassword} />
+    <Route path="/passwordreset/:email" component={PasswordReset} />
+
     <Route path="/dashboard" component={Dashboard} isPrivate />
 
     <StdRoute path="/" component={NotFound} />
