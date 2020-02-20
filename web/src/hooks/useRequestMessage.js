@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default () => {
   const [requestMessage, setRequestMessage] = useState({
-    message: null,
+    message: '',
     isError: false,
     show: false,
   });
