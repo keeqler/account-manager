@@ -16,9 +16,6 @@ class SessionController {
       });
 
     return res.status(201).send({
-      user: {
-        id: user.id,
-      },
       token: jwt.sign(
         { id: user.id, createdAt: new Date().getTime() },
         process.env.JWT_SECRET,
