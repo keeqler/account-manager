@@ -25,16 +25,17 @@ export default styled.div`
       opacity: 0;
     }
     :focus,
-    :not(:placeholder-shown) {
+    :not(:placeholder-shown):not(:disabled) {
       background: #2f2f38;
+    }
+    :disabled {
+      opacity: 0.5;
     }
   }
 
   span {
     margin-top: 5px;
-    /* font-weight: 700; */
     font-size: 14px;
     color: var(--error);
-    transition: 300ms;
   }
 `;

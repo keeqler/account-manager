@@ -9,6 +9,7 @@ export default function TextInput({
   placeholder,
   name,
   isPassword,
+  disabled,
 }) {
   return (
     <Container className={className}>
@@ -18,6 +19,7 @@ export default function TextInput({
         name={name}
         type={isPassword ? 'password' : 'text'}
         placeholder="."
+        disabled={disabled}
       />
     </Container>
   );
@@ -28,9 +30,11 @@ TextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isPassword: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
   className: '',
   isPassword: false,
+  disabled: false,
 };
