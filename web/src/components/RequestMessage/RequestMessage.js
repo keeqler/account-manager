@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import Container from './RequestMessageStyles';
 
-export default function FormMessage({ className, message, show, isError }) {
+export default function RequestMessage({ className, message, show, isError }) {
   return (
     <Container className={className}>
       <CSSTransition classNames="message" in={show} timeout={300} unmountOnExit>
@@ -14,14 +14,14 @@ export default function FormMessage({ className, message, show, isError }) {
   );
 }
 
-FormMessage.propTypes = {
+RequestMessage.propTypes = {
   className: PropTypes.string,
   message: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   isError: PropTypes.bool,
 };
 
-FormMessage.defaultProps = {
+RequestMessage.defaultProps = {
   className: '',
   isError: false,
 };
