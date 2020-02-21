@@ -2,7 +2,7 @@
 
 # Account Manager
 
-A account managing web app built entirely with NodeJS, for learning purposes only.
+An account managing web app built entirely with NodeJS, for learning purposes only.
 
 # Built with
 
