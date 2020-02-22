@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 
 import useRequestMessage from '~/hooks/useRequestMessage';
 
@@ -10,12 +11,15 @@ import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 import RequestMessage from '~/components/RequestMessage/RequestMessage';
 
+import { signInRequest } from '~/store/modules/auth/actions';
+
 export default () => {
+  const dispatch = useDispatch();
   const [requestMessage, setRequestMessage] = useRequestMessage();
 
-  async function handleSubmit(data) {
-    console.tron.log(data);
-    setRequestMessage('test', true);
+  function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
+    // setRequestMessage('test', true);
   }
 
   const schema = Yup.object().shape({

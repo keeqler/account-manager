@@ -22,7 +22,8 @@
     "react/jsx-filename-extension": ["warn", { "extensions": [".jsx", ".js"] }],
     "import/prefer-default-export": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off"
   },
   "settings": {
     "import/resolver": {

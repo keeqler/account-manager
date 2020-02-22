@@ -5,14 +5,15 @@ import { Route, Redirect } from 'react-router-dom';
 import NoAuthLayout from '~/components/_layouts/NoAuthLayout/NoAuthLayout';
 import AuthLayout from '~/components/_layouts/AuthLayout/AuthLayout';
 
+import { store } from '~/store';
+
 export default function RouteWrapper({
   component: Component,
   path,
   exact,
   isPrivate,
 }) {
-  // this will be static for now
-  const signed = true;
+  const signed = store.getState().auth.token !== null;
 
   if (!signed && isPrivate) return <Redirect to="/" />;
   if (signed && !isPrivate) return <Redirect to="/dashboard" />;
