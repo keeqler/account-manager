@@ -1,13 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { FaSignOutAlt, FaCog } from 'react-icons/fa';
 
 import Container from './AuthHeaderStyles';
 import Logo from '~/components/Logo/Logo';
 
+import { signOut } from '~/store/modules/auth/actions';
+
+import history from '~/services/history';
+
 export default () => {
+  const dispatch = useDispatch();
   const displayName = useSelector(state => state.auth.displayName);
 
   return (
@@ -18,12 +22,12 @@ export default () => {
           Welcome back, <strong>{displayName}</strong>
         </span>
         <div className="button-container">
-          <Link className="link" to="/settings">
+          <button type="button" onClick={() => history.push('/settings')}>
             <FaCog size="100%" />
-          </Link>
-          <Link className="link" to="/">
+          </button>
+          <button type="button" onClick={() => dispatch(signOut())}>
             <FaSignOutAlt size="100%" />
-          </Link>
+          </button>
         </div>
       </div>
     </Container>

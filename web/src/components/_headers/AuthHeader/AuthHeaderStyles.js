@@ -20,18 +20,19 @@ export default styled.header`
       display: flex;
       align-items: center;
 
-      .link {
-        width: 32px;
-        height: 32px;
+      button {
+        width: 26px;
+        height: 26px;
         opacity: 0.9;
         transition: opacity 300ms;
+        cursor: pointer;
 
         :hover {
           opacity: 0.7;
         }
       }
 
-      .link:first-child {
+      button:first-child {
         margin-right: 16px;
       }
     }
@@ -44,7 +45,7 @@ export default styled.header`
   @media only screen and (min-width: 770px) {
     .desktop-rightside-container {
       .welcome {
-        margin-right: 34px;
+        margin-right: 16px;
         display: block;
         font-size: 16px;
         color: var(--neutral-2);
