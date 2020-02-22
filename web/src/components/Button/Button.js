@@ -1,16 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import loadingIcon from '~/assets/loading.svg';
+
 import Wrapper from './ButtonStyles';
 
-export default function Button({ className, text, isSubmit, noBackground }) {
+export default function Button({
+  className,
+  text,
+  isSubmit,
+  noBackground,
+  loading,
+}) {
   return (
     <Wrapper
       className={className}
       type={isSubmit ? 'submit' : 'button'}
       noBackground={noBackground}
     >
-      {text}
+      {loading ? <img src={loadingIcon} alt="" /> : text}
     </Wrapper>
   );
 }
@@ -20,10 +28,12 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   isSubmit: PropTypes.bool,
   noBackground: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 Button.defaultProps = {
   className: '',
   isSubmit: false,
   noBackground: false,
+  loading: false,
 };

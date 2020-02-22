@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useRequestMessage from '~/hooks/useRequestMessage';
 
@@ -15,6 +15,7 @@ import { signInRequest } from '~/store/modules/auth/actions';
 
 export default () => {
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
   const [requestMessage, setRequestMessage] = useRequestMessage();
 
   function handleSubmit({ email, password }) {
@@ -49,7 +50,7 @@ export default () => {
         <Link className="link" to="/forgotpassword">
           I forgot my password
         </Link>
-        <Button className="submit" text="Login" isSubmit />
+        <Button className="submit" text="Login" isSubmit loading={loading} />
         <RequestMessage
           className="request-message"
           show={requestMessage.show}

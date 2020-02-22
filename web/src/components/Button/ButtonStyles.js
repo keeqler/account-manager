@@ -18,4 +18,17 @@ export default styled.button`
   :hover {
     background-size: 200%;
   }
+
+  img {
+    animation: spin 1s infinite linear;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotateZ(0deg);
+    }
+    to {
+      transform: rotateZ(360deg);
+    }
+  }
 `;
