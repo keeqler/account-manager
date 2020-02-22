@@ -1,16 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-// Assets
 import { FaSignOutAlt, FaCog } from 'react-icons/fa';
 
-// Components
 import Container from './AuthHeaderStyles';
 import Logo from '~/components/Logo/Logo';
 
-function AuthHeader({ displayName }) {
+export default () => {
+  const displayName = useSelector(state => state.auth.displayName);
+
   return (
     <Container>
       <Logo />
@@ -29,14 +28,4 @@ function AuthHeader({ displayName }) {
       </div>
     </Container>
   );
-}
-
-AuthHeader.propTypes = {
-  displayName: PropTypes.string.isRequired,
 };
-
-const mapStateToProps = state => ({
-  displayName: state.auth.displayName,
-});
-
-export default connect(mapStateToProps)(AuthHeader);
