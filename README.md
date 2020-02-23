@@ -1,8 +1,8 @@
 <p align="center"><img src="https://github.com/keeqler/account-manager/blob/master/web/src/assets/logo.png?raw=true" width="100px"></p>
 
-# Account Manager
+<h1 align="center">Account Manager</h1>
 
-An account managing web app built entirely with NodeJS, for learning purposes only.
+<p align="center">A web app entirely built with NodeJS, where you can store all your accounts data and see them anytime. This is a result of a self-taught learning on NodeJS frameworks/technologies</p>
 
 # Built with
 
