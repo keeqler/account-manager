@@ -4,17 +4,13 @@ import { FadeIn, FadeOut } from '~/components/Animations';
 
 export default styled.div`
   .message {
-    color: var(--success);
+    color: ${({ isError }) => (isError ? 'var(--error)' : 'var(--success)')};
 
-    &.error {
-      color: var(--error);
-    }
-
-    &-enter {
+    &-enter-active {
       animation: ${FadeIn} 300ms ease;
     }
 
-    &-exit {
+    &-exit-active {
       animation: ${FadeOut} 300ms ease;
     }
   }

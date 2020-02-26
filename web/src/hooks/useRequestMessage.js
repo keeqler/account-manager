@@ -2,19 +2,34 @@ import { useState } from 'react';
 
 export default () => {
   const [requestMessage, setRequestMessage] = useState({
-    message: '',
-    isError: false,
+    id: 0,
+    text: '',
     show: false,
+    isError: false,
+    timeoutId: null,
   });
 
-  async function _setRequestMessage(message, isError = false) {
+  function _setRequestMessage(id, text, isError = false) {
+    if (requestMessage.timeoutId) clearTimeout(requestMessage.timeoutId);
+
     setRequestMessage({ ...requestMessage, show: false });
 
-    if (!message) return;
+    const timeoutId = setTimeout(
+      () =>
+        setRequestMessage({ ...requestMessage, show: false, text, isError }),
+      3000,
+    );
 
-    setTimeout(() => {
-      setRequestMessage({ message, isError, show: true });
-    }, 300);
+    setRequestMessage({
+      ...requestMessage,
+      id,
+      text,
+      show: true,
+      isError,
+      timeoutId,
+    });
+
+    // console.tron.log(requestMessage);
   }
 
   return [requestMessage, _setRequestMessage];

@@ -4,20 +4,25 @@ import api from '~/services/api';
 import history from '~/services/history';
 
 import { signInSuccess } from './actions';
+import { showMessage, showLoading, hideLoading } from '../form/actions';
 
 export function* signIn({ payload }) {
   const { email, password } = payload;
-  const { error, token } = (yield call(api.post, 'sessions', {
-    email,
-    password,
-  })).data;
+  try {
+    yield put(showLoading());
 
-  if (!error) {
+    const { token } = (yield call(api.post, 'sessions', {
+      email,
+      password,
+    })).data;
+
+    yield put(hideLoading());
     yield put(signInSuccess(token, email.split('@')[0]));
 
     history.push('/dashboard');
-  } else {
-    // dispatch failure action
+  } catch ({ response: { data } }) {
+    yield put(hideLoading());
+    yield put(showMessage(data.error.msg, true));
   }
 }
 

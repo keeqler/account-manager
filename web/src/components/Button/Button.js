@@ -8,9 +8,9 @@ import Wrapper from './ButtonStyles';
 export default function Button({
   className,
   text,
+  loading,
   isSubmit,
   noBackground,
-  loading,
 }) {
   return (
     <Wrapper

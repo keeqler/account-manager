@@ -4,11 +4,13 @@ import { CSSTransition } from 'react-transition-group';
 
 import Container from './RequestMessageStyles';
 
-export default function RequestMessage({ className, message, show, isError }) {
+export default function RequestMessage({ className, state }) {
+  const { show, text, isError } = state;
+
   return (
-    <Container className={className}>
-      <CSSTransition classNames="message" in={show} timeout={300} unmountOnExit>
-        <div className={`message${isError ? ' error' : ''}`}>{message}</div>
+    <Container className={className} isError={isError}>
+      <CSSTransition classNames="message" in={show} timeout={280} unmountOnExit>
+        <span className="message">{text}</span>
       </CSSTransition>
     </Container>
   );
@@ -16,12 +18,13 @@ export default function RequestMessage({ className, message, show, isError }) {
 
 RequestMessage.propTypes = {
   className: PropTypes.string,
-  message: PropTypes.string.isRequired,
-  show: PropTypes.bool.isRequired,
-  isError: PropTypes.bool,
+  state: PropTypes.shape({
+    show: PropTypes.bool,
+    text: PropTypes.string,
+    isError: PropTypes.bool,
+  }).isRequired,
 };
 
 RequestMessage.defaultProps = {
   className: '',
-  isError: false,
 };
