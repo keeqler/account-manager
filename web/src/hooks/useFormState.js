@@ -29,5 +29,9 @@ export default () => {
     }),
   );
 
+  useEffect(() => () => store.dispatch({ type: '@form/RESET_MESSAGE_ID' }), [
+    store,
+  ]);
+
   return { loading, requestMessage };
 };

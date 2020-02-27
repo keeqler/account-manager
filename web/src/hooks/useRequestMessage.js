@@ -28,8 +28,6 @@ export default () => {
       isError,
       timeoutId,
     });
-
-    // console.tron.log(requestMessage);
   }
 
   return [requestMessage, _setRequestMessage];

@@ -14,6 +14,10 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         draft.message.id = Math.random();
         break;
 
+      case '@form/RESET_MESSAGE_ID':
+        draft.message.id = 0;
+        break;
+
       case '@form/SHOW_LOADING':
         draft.loading = true;
         break;
