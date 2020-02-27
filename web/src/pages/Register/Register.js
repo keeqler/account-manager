@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-
-import useRequestMessage from '~/hooks/useRequestMessage';
 
 import Container from './RegisterStyles';
 import Form from '~/components/Form';
@@ -10,11 +9,18 @@ import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 import RequestMessage from '~/components/RequestMessage/RequestMessage';
 
+import useFormState from '~/hooks/useFormState';
+
+import { signUpRequest } from '~/store/modules/auth/actions';
+
 export default () => {
-  const [requestMessage, setRequestMessage] = useRequestMessage();
+  const dispatch = useDispatch();
+  const { loading, requestMessage } = useFormState();
 
   function handleSubmit(data) {
-    console.tron.log(data);
+    const { email, password } = data;
+
+    dispatch(signUpRequest(email, password));
   }
 
   const schema = Yup.object().shape({
@@ -50,13 +56,8 @@ export default () => {
           name="confirmPassword"
           isPassword
         />
-        <Button className="submit" text="Register" isSubmit />
-        <RequestMessage
-          className="request-message"
-          show={requestMessage.show}
-          message={requestMessage.message}
-          isError={requestMessage.isError}
-        />
+        <Button className="submit" text="Register" loading={loading} isSubmit />
+        <RequestMessage className="request-message" state={requestMessage} />
         <span className="last-link-wrapper">
           Already have an account?{' '}
           <Link className="link" to="/">

@@ -1,3 +1,8 @@
+export const signUpRequest = (email, password) => ({
+  type: '@auth/SIGN_UP_REQUEST',
+  payload: { email, password },
+});
+
 export const signInRequest = (email, password) => ({
   type: '@auth/SIGN_IN_REQUEST',
   payload: { email, password },

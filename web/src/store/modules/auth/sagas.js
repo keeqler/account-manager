@@ -6,6 +6,24 @@ import history from '~/services/history';
 import { signInSuccess } from './actions';
 import { showMessage, showLoading, hideLoading } from '../form/actions';
 
+export function* signUp({ payload }) {
+  const { email, password } = payload;
+
+  try {
+    yield put(showLoading());
+    yield call(api.post, 'users', { email, password });
+    yield put(hideLoading());
+    yield put(
+      showMessage('Successfully registered! Redirecting to login page...'),
+    );
+
+    setTimeout(() => history.push('/'), 3300);
+  } catch ({ response: { data: responseData } }) {
+    yield put(hideLoading());
+    yield put(showMessage(responseData.error.msg, true));
+  }
+}
+
 export function* signIn({ payload }) {
   const { email, password } = payload;
   try {
@@ -31,6 +49,7 @@ export function signOut() {
 }
 
 export default all([
+  takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_OUT', signOut),
 ]);
