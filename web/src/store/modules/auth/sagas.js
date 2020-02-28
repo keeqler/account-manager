@@ -64,9 +64,31 @@ export function* forgotPassword({ payload }) {
   }
 }
 
+export function* passwordReset({ payload }) {
+  const { code, email, password } = payload;
+
+  try {
+    yield put(showLoading());
+    yield call(api.put, `password_recovery/${email}`, {
+      token: code,
+      password,
+    });
+    yield put(hideLoading());
+    yield put(
+      showMessage('Password successfully reset! Redirecting to login page...'),
+    );
+
+    setTimeout(() => history.push('/'), 3300);
+  } catch ({ response: { data: responseData } }) {
+    yield put(hideLoading());
+    yield put(showMessage(responseData.error.msg, true));
+  }
+}
+
 export default all([
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_OUT', signOut),
   takeLatest('@auth/FORGOT_PASSWORD', forgotPassword),
+  takeLatest('@auth/PASSWORD_RESET', passwordReset),
 ]);

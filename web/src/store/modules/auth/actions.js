@@ -21,3 +21,8 @@ export const forgotPassword = email => ({
   type: '@auth/FORGOT_PASSWORD',
   payload: { email },
 });
+
+export const passwordReset = (code, email, password) => ({
+  type: '@auth/PASSWORD_RESET',
+  payload: { code, email, password },
+});
