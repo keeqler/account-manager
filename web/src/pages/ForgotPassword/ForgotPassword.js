@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import { Link } from 'react-router-dom';
+import { useStore } from 'react-redux';
 import * as Yup from 'yup';
 
-import useRequestMessage from '~/hooks/useRequestMessage';
+import useFormState from '~/hooks/useFormState';
+
+import { forgotPassword } from '~/store/modules/auth/actions';
 
 import Container from './ForgotPasswordStyles';
 import Form from '~/components/Form';
@@ -11,14 +13,14 @@ import TextInput from '~/components/TextInput/TextInput';
 import Button from '~/components/Button/Button';
 import RequestMessage from '~/components/RequestMessage/RequestMessage';
 
-export default function ForgotPassword({ history }) {
-  const [requestMessage, setRequestMessage] = useRequestMessage();
+export default () => {
+  const { dispatch } = useStore();
+  const { loading, requestMessage } = useFormState();
 
   function handleSubmit(data) {
-    console.tron.log(data);
-    setRequestMessage('test', true);
+    const { email } = data;
 
-    setTimeout(() => history.push(`/passwordreset/${data.email}`), 2000);
+    dispatch(forgotPassword(email));
   }
 
   const schema = Yup.object().shape({
@@ -36,13 +38,8 @@ export default function ForgotPassword({ history }) {
           placeholder="E-mail address"
           name="email"
         />
-        <Button className="submit" text="Send" isSubmit />
-        <RequestMessage
-          className="request-message"
-          show={requestMessage.show}
-          message={requestMessage.message}
-          isError={requestMessage.isError}
-        />
+        <Button className="submit" text="Send" loading={loading} isSubmit />
+        <RequestMessage className="request-message" state={requestMessage} />
         <span className="last-link-wrapper">
           Reminded your password?{' '}
           <Link className="link" to="/">
@@ -52,8 +49,4 @@ export default function ForgotPassword({ history }) {
       </Form>
     </Container>
   );
-}
-
-ForgotPassword.propTypes = {
-  history: ReactRouterPropTypes.history.isRequired,
 };

@@ -16,3 +16,8 @@ export const signInSuccess = (token, displayName) => ({
 export const signOut = () => ({
   type: '@auth/SIGN_OUT',
 });
+
+export const forgotPassword = email => ({
+  type: '@auth/FORGOT_PASSWORD',
+  payload: { email },
+});
