@@ -41,7 +41,7 @@ class PassRecoveryController {
     user.password_recovery_token = null;
     user.password_recovery_expiry = null;
 
-    if (tokenValidationResult !== 'tokenValid') {
+    if (tokenValidationResult !== 'validToken') {
       let msg;
 
       // eslint-disable-next-line default-case
