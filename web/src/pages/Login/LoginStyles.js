@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  form {
-    .text-input.password {
-      margin-bottom: 4px;
-    }
+  .text-input.password {
+    margin-bottom: 4px;
+  }
 
-    .submit {
-      margin-top: 24px;
-    }
+  button {
+    margin-top: 20px !important;
   }
 `;

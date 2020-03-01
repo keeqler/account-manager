@@ -1,24 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useStore } from 'react-redux';
-
-import Container from './LoginStyles';
-import Form from '~/components/Form';
-import TextInput from '~/components/TextInput/TextInput';
-import Button from '~/components/Button/Button';
-import RequestMessage from '~/components/RequestMessage/RequestMessage';
-
-import useFormState from '~/hooks/useFormState';
+import { useDispatch } from 'react-redux';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
+import Wrapper from './LoginStyles';
+import Form from '~/components/Form/Form';
+import RequestMessage from '~/components/FormRequestMessage/FormRequestMessage';
+import SubmitButton from '~/components/FormSubmitButton';
+import TextInput from '~/components/TextInput/TextInput';
+
 export default () => {
-  const store = useStore();
-  const { loading, requestMessage } = useFormState();
+  const dispatch = useDispatch();
 
   function handleSubmit({ email, password }) {
-    store.dispatch(signInRequest(email, password));
+    dispatch(signInRequest(email, password));
   }
 
   const schema = Yup.object().shape({
@@ -31,32 +28,23 @@ export default () => {
   });
 
   return (
-    <Container>
+    <Wrapper>
       <Form onSubmit={handleSubmit} schema={schema}>
         <h1>Login</h1>
+        <TextInput placeholder="E-mail address" name="email" />
         <TextInput
-          className="text-input"
-          placeholder="E-mail address"
-          name="email"
-        />
-        <TextInput
-          className="text-input password"
+          className="password"
           placeholder="Password"
           name="password"
           isPassword
         />
-        <Link className="link" to="/forgotpassword">
-          I forgot my password
-        </Link>
-        <Button className="submit" text="Login" loading={loading} isSubmit />
-        <RequestMessage className="request-message" state={requestMessage} />
-        <span className="last-link-wrapper">
-          Don&apos;t have an account?{' '}
-          <Link className="link" to="/register">
-            Register now
-          </Link>
+        <Link to="/forgotpassword">I forgot my password</Link>
+        <SubmitButton text="Login" />
+        <RequestMessage />
+        <span className="last-link-container">
+          Don&apos;t have an account? <Link to="/register">Register now</Link>
         </span>
       </Form>
-    </Container>
+    </Wrapper>
   );
 };

@@ -3,19 +3,16 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-import Container from './RegisterStyles';
-import Form from '~/components/Form';
-import TextInput from '~/components/TextInput/TextInput';
-import Button from '~/components/Button/Button';
-import RequestMessage from '~/components/RequestMessage/RequestMessage';
-
-import useFormState from '~/hooks/useFormState';
-
 import { signUpRequest } from '~/store/modules/auth/actions';
+
+import Wrapper from './RegisterStyles';
+import Form from '~/components/Form/Form';
+import RequestMessage from '~/components/FormRequestMessage/FormRequestMessage';
+import SubmitButton from '~/components/FormSubmitButton';
+import TextInput from '~/components/TextInput/TextInput';
 
 export default () => {
   const dispatch = useDispatch();
-  const { loading, requestMessage } = useFormState();
 
   function handleSubmit(data) {
     const { email, password } = data;
@@ -36,35 +33,25 @@ export default () => {
   });
 
   return (
-    <Container>
+    <Wrapper>
       <Form onSubmit={handleSubmit} schema={schema}>
         <h1>Register</h1>
+        <TextInput placeholder="E-mail address" name="email" />
+        <TextInput placeholder="Password" name="password" isPassword />
         <TextInput
-          className="text-input"
-          placeholder="E-mail address"
-          name="email"
-        />
-        <TextInput
-          className="text-input password"
-          placeholder="Password"
-          name="password"
-          isPassword
-        />
-        <TextInput
-          className="text-input password"
           placeholder="Confirm password"
           name="confirmPassword"
           isPassword
         />
-        <Button className="submit" text="Register" loading={loading} isSubmit />
-        <RequestMessage className="request-message" state={requestMessage} />
-        <span className="last-link-wrapper">
+        <SubmitButton text="Register" />
+        <RequestMessage />
+        <span className="last-link-container">
           Already have an account?{' '}
           <Link className="link" to="/">
             Login now
           </Link>
         </span>
       </Form>
-    </Container>
+    </Wrapper>
   );
 };

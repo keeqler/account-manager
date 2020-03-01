@@ -1,22 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useStore } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-
-import useFormState from '~/hooks/useFormState';
 
 import { passwordReset } from '~/store/modules/auth/actions';
 
-import Container from './PasswordResetStyles';
-import Form from '~/components/Form';
+import Wrapper from './PasswordResetStyles';
+import Form from '~/components/Form/Form';
+import RequestMessage from '~/components/FormRequestMessage/FormRequestMessage';
+import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput/TextInput';
-import Button from '~/components/Button/Button';
-import RequestMessage from '~/components/RequestMessage/RequestMessage';
 
 export default function PasswordReset({ match: { params } }) {
-  const { dispatch } = useStore();
-  const { loading, requestMessage } = useFormState();
+  const dispatch = useDispatch();
 
   function handleSubmit({ code, email, password }) {
     dispatch(passwordReset(code, email, password));
@@ -38,51 +35,31 @@ export default function PasswordReset({ match: { params } }) {
   });
 
   return (
-    <Container>
+    <Wrapper>
       <Form
         onSubmit={handleSubmit}
         initialData={{ email: params.email }}
         schema={schema}
       >
         <h1>Password reset</h1>
+        <TextInput placeholder="E-mail address" name="email" disabled />
+        <TextInput placeholder="Recovery code" name="code" />
+        <TextInput placeholder="New password" name="password" isPassword />
         <TextInput
-          className="text-input"
-          placeholder="E-mail address"
-          name="email"
-          disabled
-        />
-        <TextInput
-          className="text-input"
-          placeholder="Recovery code"
-          name="code"
-        />
-        <TextInput
-          className="text-input"
-          placeholder="New password"
-          name="password"
-          isPassword
-        />
-        <TextInput
-          className="text-input"
           placeholder="Confirm new password"
           name="confirmPassword"
           isPassword
         />
-        <Button
-          className="submit"
-          text="Reset password"
-          loading={loading}
-          isSubmit
-        />
-        <RequestMessage className="request-message" state={requestMessage} />
-        <span className="last-link-wrapper">
+        <SubmitButton text="Reset password" />
+        <RequestMessage />
+        <span className="last-link-container">
           Reminded your password?{' '}
           <Link className="link" to="/">
             Login now
           </Link>
         </span>
       </Form>
-    </Container>
+    </Wrapper>
   );
 }
 

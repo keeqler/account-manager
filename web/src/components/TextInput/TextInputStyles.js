@@ -12,7 +12,7 @@ export default styled.div`
     font-weight: 700;
   }
 
-  .input {
+  input {
     width: 100%;
     height: 40px;
     padding: 0 10px;

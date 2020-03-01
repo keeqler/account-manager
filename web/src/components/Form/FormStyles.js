@@ -11,19 +11,15 @@ export default styled(Form)`
     text-align: center;
   }
 
+  button {
+    margin-top: 10px;
+  }
+
   .text-input {
     margin-bottom: 12px;
   }
 
-  .submit {
-    margin-top: 12px;
-  }
-
-  .request-message {
-    margin: 6px auto;
-  }
-
-  .last-link-wrapper {
+  .last-link-container {
     font-size: 16px;
     font-weight: 700;
     text-align: center;

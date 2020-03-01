@@ -12,10 +12,9 @@ export default function TextInput({
   disabled,
 }) {
   return (
-    <Container className={className}>
+    <Container className={`text-input ${className}`}>
       <label>{placeholder}</label>
       <Input
-        className="input"
         name={name}
         type={isPassword ? 'password' : 'text'}
         placeholder="."

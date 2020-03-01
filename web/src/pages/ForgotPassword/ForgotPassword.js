@@ -1,21 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useStore } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-
-import useFormState from '~/hooks/useFormState';
 
 import { forgotPassword } from '~/store/modules/auth/actions';
 
-import Container from './ForgotPasswordStyles';
-import Form from '~/components/Form';
+import Wrapper from './ForgotPasswordStyles';
+import Form from '~/components/Form/Form';
+import RequestMessage from '~/components/FormRequestMessage/FormRequestMessage';
+import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput/TextInput';
-import Button from '~/components/Button/Button';
-import RequestMessage from '~/components/RequestMessage/RequestMessage';
 
 export default () => {
-  const { dispatch } = useStore();
-  const { loading, requestMessage } = useFormState();
+  const dispatch = useDispatch();
 
   function handleSubmit(data) {
     const { email } = data;
@@ -30,23 +27,19 @@ export default () => {
   });
 
   return (
-    <Container>
+    <Wrapper>
       <Form onSubmit={handleSubmit} schema={schema}>
         <h1>Password recovery</h1>
-        <TextInput
-          className="text-input"
-          placeholder="E-mail address"
-          name="email"
-        />
-        <Button className="submit" text="Send" loading={loading} isSubmit />
-        <RequestMessage className="request-message" state={requestMessage} />
-        <span className="last-link-wrapper">
+        <TextInput placeholder="E-mail address" name="email" />
+        <SubmitButton text="Send" />
+        <RequestMessage />
+        <span className="last-link-container">
           Reminded your password?{' '}
           <Link className="link" to="/">
             Login now
           </Link>
         </span>
       </Form>
-    </Container>
+    </Wrapper>
   );
 };

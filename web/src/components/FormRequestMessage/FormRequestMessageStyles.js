@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { FadeIn, FadeOut } from '~/components/Animations';
 
 export default styled.div`
+  margin: 6px auto;
+
   .message {
     color: ${({ isError }) => (isError ? 'var(--error)' : 'var(--success)')};
 
