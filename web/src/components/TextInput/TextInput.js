@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import { Input } from '@rocketseat/unform';
+import PropTypes from 'prop-types';
 
 import Container from './TextInputStyles';
 

@@ -1,15 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import * as Yup from 'yup';
 
-import { forgotPassword } from '~/store/modules/auth/actions';
-
-import Wrapper from './ForgotPasswordStyles';
 import Form from '~/components/Form/Form';
 import RequestMessage from '~/components/FormRequestMessage/FormRequestMessage';
 import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput/TextInput';
+import { forgotPassword } from '~/store/modules/auth/actions';
+
+import Wrapper from './ForgotPasswordStyles';
 
 export default () => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Form } from '@rocketseat/unform';
+import styled from 'styled-components';
 
 export default styled(Form)`
   display: flex;

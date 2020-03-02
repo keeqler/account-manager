@@ -1,14 +1,12 @@
 import React from 'react';
+import { FaSignOutAlt, FaCog } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { FaSignOutAlt, FaCog } from 'react-icons/fa';
-
-import Container from './AuthHeaderStyles';
 import Logo from '~/components/Logo/Logo';
-
+import history from '~/services/history';
 import { signOut } from '~/store/modules/auth/actions';
 
-import history from '~/services/history';
+import Container from './AuthHeaderStyles';
 
 export default () => {
   const dispatch = useDispatch();

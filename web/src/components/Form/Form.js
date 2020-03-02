@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useStore } from 'react-redux';
-import PropTypes from 'prop-types';
 
-import useRequestMessage from './hooks/useRequestMessage';
+import PropTypes from 'prop-types';
 
 import { FormContext } from '~/Contexts';
 
 import Container from './FormStyles';
+import useRequestMessage from './hooks/useRequestMessage';
 
 export default function Form({ children, schema, initialData, onSubmit }) {
   const store = useStore();

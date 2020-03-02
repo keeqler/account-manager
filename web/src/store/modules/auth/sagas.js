@@ -3,8 +3,8 @@ import { call, put, all, takeLatest } from 'redux-saga/effects';
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { signInSuccess } from './actions';
 import { showMessage, showLoading, hideLoading } from '../form/actions';
+import { signInSuccess } from './actions';
 
 export function* signUp({ payload }) {
   const { email, password } = payload;

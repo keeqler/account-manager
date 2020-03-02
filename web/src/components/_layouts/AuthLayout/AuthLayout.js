@@ -1,8 +1,10 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 
-import Container from './AuthLayoutStyles';
 import AuthHeader from '~/components/_headers/AuthHeader/AuthHeader';
+
+import Container from './AuthLayoutStyles';
 
 export default function Auth({ children }) {
   return (

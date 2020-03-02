@@ -1,8 +1,10 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 
-import Container from './NoAuthLayoutStyles';
 import NoAuthHeader from '~/components/_headers/NoAuthHeader/NoAuthHeader';
+
+import Container from './NoAuthLayoutStyles';
 
 export default function NoAuth({ children }) {
   return (

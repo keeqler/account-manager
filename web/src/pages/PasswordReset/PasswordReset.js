@@ -1,16 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
-import { passwordReset } from '~/store/modules/auth/actions';
-
-import Wrapper from './PasswordResetStyles';
 import Form from '~/components/Form/Form';
 import RequestMessage from '~/components/FormRequestMessage/FormRequestMessage';
 import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput/TextInput';
+import { passwordReset } from '~/store/modules/auth/actions';
+
+import Wrapper from './PasswordResetStyles';
 
 export default function PasswordReset({ match: { params } }) {
   const dispatch = useDispatch();
