@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Container from './NotFoundStyles';
+import Container from './styles';
 
 export default () => (
   <Container>

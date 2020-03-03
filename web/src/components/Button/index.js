@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import loadingIcon from '~/assets/loading.svg';
 
-import Wrapper from './ButtonStyles';
+import Wrapper from './styles';
 
 export default function Button({
   className,

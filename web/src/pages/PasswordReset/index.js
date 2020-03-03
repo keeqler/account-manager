@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
-import Form from '~/components/Form/Form';
-import RequestMessage from '~/components/FormRequestMessage/FormRequestMessage';
+import Form from '~/components/Form';
+import RequestMessage from '~/components/FormRequestMessage';
 import SubmitButton from '~/components/FormSubmitButton';
-import TextInput from '~/components/TextInput/TextInput';
+import TextInput from '~/components/TextInput';
 import { passwordReset } from '~/store/modules/auth/actions';
 
-import Wrapper from './PasswordResetStyles';
+import Wrapper from './styles';
 
 export default function PasswordReset({ match: { params } }) {
   const dispatch = useDispatch();

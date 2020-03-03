@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import { FormContext } from '~/Contexts';
 
-import Container from './FormRequestMessageStyles';
+import Container from './styles';
 
 export default function RequestMessage() {
   const {

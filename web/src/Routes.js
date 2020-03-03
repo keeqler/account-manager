@@ -2,16 +2,12 @@ import React from 'react';
 import { Switch, Route as StdRoute } from 'react-router-dom';
 
 import Route from '~/components/Route';
-
-// Non-authenticated pages
-import Dashboard from '~/pages/Dashboard/Dashboard';
-import ForgotPassword from '~/pages/ForgotPassword/ForgotPassword';
-import Login from '~/pages/Login/Login';
-import NotFound from '~/pages/NotFound/NotFound';
-import PasswordReset from '~/pages/PasswordReset/PasswordReset';
-import Register from '~/pages/Register/Register';
-
-// Authenticated pages
+import Dashboard from '~/pages/Dashboard';
+import ForgotPassword from '~/pages/ForgotPassword';
+import Login from '~/pages/Login';
+import NotFound from '~/pages/NotFound';
+import PasswordReset from '~/pages/PasswordReset';
+import Register from '~/pages/Register';
 
 export default () => (
   <Switch>

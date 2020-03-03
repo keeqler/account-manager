@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 
 import { FormContext } from '~/Contexts';
 
-import Container from './FormStyles';
 import useRequestMessage from './hooks/useRequestMessage';
+
+import Container from './styles';
 
 export default function Form({ children, schema, initialData, onSubmit }) {
   const store = useStore();

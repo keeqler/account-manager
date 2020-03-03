@@ -1,5 +1,5 @@
 import React from 'react';
 
-import Container from './DashboardStyles';
+import Container from './styles';
 
 export default () => <Container>Dashboard</Container>;

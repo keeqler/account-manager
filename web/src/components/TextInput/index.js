@@ -3,7 +3,7 @@ import React from 'react';
 import { Input } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 
-import Container from './TextInputStyles';
+import Container from './styles';
 
 export default function TextInput({
   className,

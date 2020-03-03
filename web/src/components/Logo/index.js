@@ -2,7 +2,7 @@ import React from 'react';
 
 import Logo from '~/assets/logo.png';
 
-import Container from './LogoStyles';
+import Container from './styles';
 
 export default () => (
   <Container>

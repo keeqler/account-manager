@@ -2,9 +2,9 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import AuthHeader from '~/components/_headers/AuthHeader/AuthHeader';
+import AuthHeader from '~/components/_headers/AuthHeader';
 
-import Container from './AuthLayoutStyles';
+import Container from './styles';
 
 export default function Auth({ children }) {
   return (
