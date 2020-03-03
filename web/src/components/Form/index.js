@@ -30,7 +30,7 @@ export default function Form({ children, schema, initialData, onSubmit }) {
 
       store.dispatch({ type: '@form/RESET_MESSAGE_ID' });
     },
-    [store],
+    [store, message.timeoutId],
   );
 
   return (
