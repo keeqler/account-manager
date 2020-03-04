@@ -1,10 +1,10 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
 
+import { signInSuccess } from './actions';
 import api from '~/services/api';
 import history from '~/services/history';
 
 import { showMessage, showLoading, hideLoading } from '../form/actions';
-import { signInSuccess } from './actions';
 
 export function* signUp({ payload }) {
   const { email, password } = payload;

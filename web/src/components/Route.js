@@ -3,9 +3,10 @@ import { Route, Redirect } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
+import { store } from '~/store';
+
 import AuthLayout from '~/components/_layouts/AuthLayout';
 import NoAuthLayout from '~/components/_layouts/NoAuthLayout';
-import { store } from '~/store';
 
 export default function RouteWrapper({
   component: Component,

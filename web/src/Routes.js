@@ -1,13 +1,14 @@
 import React from 'react';
 import { Switch, Route as StdRoute } from 'react-router-dom';
 
-import Route from '~/components/Route';
 import Dashboard from '~/pages/Dashboard';
 import ForgotPassword from '~/pages/ForgotPassword';
 import Login from '~/pages/Login';
 import NotFound from '~/pages/NotFound';
 import PasswordReset from '~/pages/PasswordReset';
 import Register from '~/pages/Register';
+
+import Route from '~/components/Route';
 
 export default () => (
   <Switch>

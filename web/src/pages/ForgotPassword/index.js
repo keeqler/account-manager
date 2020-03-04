@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 
 import * as Yup from 'yup';
 
+import { forgotPassword } from '~/store/modules/auth/actions';
+
 import Form from '~/components/Form';
 import RequestMessage from '~/components/FormRequestMessage';
 import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput';
-import { forgotPassword } from '~/store/modules/auth/actions';
 
 import Wrapper from './styles';
 

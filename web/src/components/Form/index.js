@@ -3,9 +3,8 @@ import { useStore } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import { FormContext } from '~/Contexts';
-
 import useRequestMessage from './hooks/useRequestMessage';
+import { FormContext } from '~/Contexts';
 
 import Container from './styles';
 

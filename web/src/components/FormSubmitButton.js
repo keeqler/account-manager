@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 
 import PropTypes from 'prop-types';
 
-import StandardButton from '~/components/Button';
 import { FormContext } from '~/Contexts';
+
+import StandardButton from '~/components/Button';
 
 export default function Button({ text }) {
   const { loading } = useContext(FormContext);
