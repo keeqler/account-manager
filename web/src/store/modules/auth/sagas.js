@@ -37,6 +37,8 @@ export function* signIn({ payload }) {
     yield put(hideLoading());
     yield put(signInSuccess(token, email.split('@')[0]));
 
+    api.defaults.headers.Authentication = `Bearer ${token}`;
+
     history.push('/dashboard');
   } catch ({ response: { data } }) {
     yield put(hideLoading());
@@ -45,6 +47,8 @@ export function* signIn({ payload }) {
 }
 
 export function signOut() {
+  api.defaults.headers.Authentication = undefined;
+
   history.push('/');
 }
 
@@ -85,10 +89,19 @@ export function* passwordReset({ payload }) {
   }
 }
 
+function setToken({ payload }) {
+  if (!payload) return;
+
+  const { token } = payload.auth;
+
+  if (token) api.defaults.headers.Authentication = `Bearer ${token}`;
+}
+
 export default all([
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_OUT', signOut),
   takeLatest('@auth/FORGOT_PASSWORD', forgotPassword),
   takeLatest('@auth/PASSWORD_RESET', passwordReset),
+  takeLatest('persist/REHYDRATE', setToken),
 ]);
