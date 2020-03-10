@@ -37,7 +37,7 @@ export function* signIn({ payload }) {
     yield put(hideLoading());
     yield put(signInSuccess(token, email.split('@')[0]));
 
-    api.defaults.headers.Authentication = `Bearer ${token}`;
+    api.defaults.headers.authorization = `Bearer ${token}`;
 
     history.push('/dashboard');
   } catch ({ response: { data } }) {
@@ -47,7 +47,7 @@ export function* signIn({ payload }) {
 }
 
 export function signOut() {
-  api.defaults.headers.Authentication = undefined;
+  api.defaults.headers.authorization = undefined;
 
   history.push('/');
 }
@@ -94,7 +94,7 @@ function setToken({ payload }) {
 
   const { token } = payload.auth;
 
-  if (token) api.defaults.headers.Authentication = `Bearer ${token}`;
+  if (token) api.defaults.headers.authorization = `Bearer ${token}`;
 }
 
 export default all([
