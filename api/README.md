@@ -146,6 +146,11 @@ POST /accounts
 
 ```json
 201 CREATED
+
+{
+  "id": 123,
+  "updated_at": "2019-12-06 03:59:55.341+00"
+}
 ```
 
 ## Get all user's accounts (authenticated)

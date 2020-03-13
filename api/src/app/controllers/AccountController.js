@@ -13,13 +13,8 @@ class AccountController {
     });
 
     return res.status(201).send({
-      ...account,
-      user_id: undefined,
-      UserId: undefined,
-      password: undefined,
-      twofa_secret: undefined,
-      created_at: undefined,
-      updated_at: undefined,
+      id: account.id,
+      updated_at: account.updated_at,
     });
   }
 
