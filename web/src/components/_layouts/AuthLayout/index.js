@@ -10,7 +10,7 @@ export default function Auth({ children }) {
   return (
     <Container>
       <AuthHeader />
-      <main>{children}</main>
+      {children}
     </Container>
   );
 }

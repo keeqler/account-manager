@@ -12,10 +12,7 @@ export default createGlobalStyle`
     --neutral-2: #d8d8d8;
     --background-1: #0d0d11;
     --background-2: #1e1e23;
-  }
-
-  html, body, #root {
-    height: 100%;
+    --background-3: #3f3f41;
   }
 
   * {
