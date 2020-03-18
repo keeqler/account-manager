@@ -6,7 +6,7 @@
 
 # Built with
 
-### Back-end:
+## Back-end:
 
 - Express
 - Sequelize (Postgres)
@@ -14,7 +14,7 @@
 - Bee Queue
 - JSON Web Token
 
-### Front-end:
+## Front-end:
 
 - React
 - Redux
@@ -22,4 +22,17 @@
 - Styled Components
 - Unform (forms)
 
-#### More info will be added soon
+# Requirements
+
+- Docker
+- Docker Compose
+
+# Running
+
+Clone this repo, then run the following command in the project directory root:
+
+```shell
+$ docker-compose up -d
+```
+
+You can now access `localhost:3000` in your browser.
