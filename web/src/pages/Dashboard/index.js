@@ -58,10 +58,10 @@ export default class Dashboard extends Component {
           accounts: [...accounts, ...data],
           nextPage: nextPage + 1,
         }));
-
-        if (loading)
-          this.setState(prevState => ({ ...prevState, loading: false }));
       }
+
+      if (loading)
+        this.setState(prevState => ({ ...prevState, loading: false }));
     }
   };
 
@@ -73,6 +73,7 @@ export default class Dashboard extends Component {
 
   render() {
     const { loading, accounts } = this.state;
+    console.tron.log(loading);
 
     if (!loading && !accounts.length)
       return (
