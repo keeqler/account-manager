@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    volumes:
+      - ./web:/usr/app
+    ports:
+      - 3000:3000
+    command: bash -c "yarn && yarn start"
+    depends_on:
+      - api
+
+  api:
+    build: .
+    volumes:
+      - ./api:/usr/app
+    ports:
+      - 3333:3333
+    command: bash -c "yarn && yarn sequelize-cli db:migrate && yarn dev & yarn start-queue"
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=777
+    ports:
+      - 5432:5432
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
