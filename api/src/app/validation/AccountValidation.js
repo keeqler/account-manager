@@ -15,7 +15,8 @@ export default {
       .withMessage('Value type must be string.'),
     body('twofa_secret')
       .optional()
-      .isLength({ min: 16 })
+      .isString()
+      .custom(value => !value.length || value.length > 15)
       .withMessage('Length must be at least 16 characters long.'),
   ],
 
@@ -41,7 +42,8 @@ export default {
       .withMessage('Value type must be string.'),
     body('twofa_secret')
       .optional()
-      .isLength({ min: 16 })
+      .isString()
+      .custom(value => !value.length || value.length > 15)
       .withMessage('Length must be at least 16 characters long.'),
   ],
 
