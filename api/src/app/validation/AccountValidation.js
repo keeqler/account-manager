@@ -13,10 +13,10 @@ export default {
       .withMessage('Value must be provided.')
       .isString()
       .withMessage('Value type must be string.'),
+    body('label').customSanitizer(value => (value ? value : '')),
     body('twofa_secret')
-      .optional()
-      .isString()
-      .custom(value => !value.length || value.length > 15)
+      .customSanitizer(value => (value ? value : ''))
+      .custom(value => !value?.length || value?.length > 15)
       .withMessage('Length must be at least 16 characters long.'),
   ],
 
@@ -34,16 +34,18 @@ export default {
 
   update: [
     body(['label', 'service', 'username', 'password', 'twofa_secret'])
+      .optional()
+      .isString()
+      .withMessage('Value type must be string.')
       .custom((value, { req }) => Object.keys(req.body).length)
       .withMessage('At least one value must be provided.'),
-    body(['label', 'service', 'username', 'password', 'twofa_secret'])
-      .optional()
-      .isString()
-      .withMessage('Value type must be string.'),
+    body(['service', 'username', 'password'])
+      .notEmpty()
+      .withMessage('Value must not be empty'),
+    body(['label']).customSanitizer(value => (value ? value : '')),
     body('twofa_secret')
-      .optional()
-      .isString()
-      .custom(value => !value.length || value.length > 15)
+      .customSanitizer(value => (value ? value : ''))
+      .custom(value => !value?.length || value?.length > 15)
       .withMessage('Length must be at least 16 characters long.'),
   ],
 
