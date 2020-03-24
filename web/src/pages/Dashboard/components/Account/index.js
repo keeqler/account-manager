@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Container, LoadingDetail, Detail } from './styles';
 
-export default function Account({ details, loading }) {
+export default function Account({ details, loading, onClick }) {
   if (loading)
     return (
       <Container loading={1}>
@@ -16,7 +16,7 @@ export default function Account({ details, loading }) {
     );
 
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Detail>
         <FaGlobeAmericas className="icon" />
         <span>{details.service}</span>
@@ -34,11 +34,13 @@ export default function Account({ details, loading }) {
 }
 
 Account.propTypes = {
-  details: props =>
-    !props.loading && new Error('Please provide account details'),
+  details: PropTypes.objectOf(PropTypes.string),
   loading: PropTypes.bool,
+  onClick: PropTypes.func,
 };
+
 Account.defaultProps = {
   details: { service: '', label: '', username: '' },
   loading: false,
+  onClick: () => {},
 };

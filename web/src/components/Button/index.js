@@ -2,12 +2,13 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import loadingIcon from '~/assets/loading.svg';
+import LoadingCircle from '~/components/LoadingCircle';
 
 import Wrapper from './styles';
 
 export default function Button({
   className,
+  onClick,
   text,
   loading,
   isSubmit,
@@ -18,14 +19,16 @@ export default function Button({
       className={className}
       type={isSubmit ? 'submit' : 'button'}
       noBackground={noBackground}
+      onClick={onClick}
     >
-      {loading ? <img src={loadingIcon} alt="" /> : text}
+      {loading ? <LoadingCircle /> : text}
     </Wrapper>
   );
 }
 
 Button.propTypes = {
   className: PropTypes.string,
+  onClick: PropTypes.func,
   text: PropTypes.string.isRequired,
   isSubmit: PropTypes.bool,
   noBackground: PropTypes.bool,
@@ -34,6 +37,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   className: '',
+  onClick: () => {},
   isSubmit: false,
   noBackground: false,
   loading: false,

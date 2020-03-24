@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import Account from './components/Account';
 import api from '~/services/api';
+
+import Account from './components/Account';
+import AccountDataModal from './components/AccountDataModal';
 
 import {
   Button,
@@ -16,8 +18,11 @@ export default class Dashboard extends Component {
     super();
 
     this.state = {
-      accounts: [],
       loading: true,
+      showModal: false,
+      modalAccountId: null,
+      modalIsCreatorType: false,
+      accounts: [],
       nextPage: 1,
       lastRequestedPage: 0,
     };
@@ -30,10 +35,18 @@ export default class Dashboard extends Component {
   }
 
   async componentDidUpdate(prevState) {
-    const { loading, nextPage } = this.state;
+    const { loading, nextPage, showModal } = this.state;
 
     if (prevState.loading !== loading && nextPage === 2) {
       await this.trackScrolling();
+    }
+
+    if (prevState.showModal !== showModal) {
+      if (showModal) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'unset';
+      }
     }
   }
 
@@ -45,23 +58,20 @@ export default class Dashboard extends Component {
     const { nextPage, lastRequestedPage, accounts, loading } = this.state;
 
     if (nextPage !== lastRequestedPage) {
-      this.setState(prevState => ({
-        ...prevState,
+      this.setState(state => ({
+        ...state,
         lastRequestedPage: nextPage,
       }));
 
       const { data } = await api.get(`accounts?page=${nextPage}`);
 
-      if (data.length) {
-        this.setState(prevState => ({
-          ...prevState,
+      if (data.length)
+        this.setState(state => ({
+          ...state,
           accounts: [...accounts, ...data],
           nextPage: nextPage + 1,
         }));
-      }
-
-      if (loading)
-        this.setState(prevState => ({ ...prevState, loading: false }));
+      if (loading) this.setState(state => ({ ...state, loading: false }));
     }
   };
 
@@ -71,9 +81,37 @@ export default class Dashboard extends Component {
       await this.requestNextPage();
   };
 
+  addAccount = account =>
+    this.setState(state => ({
+      ...state,
+      accounts: [account, ...state.accounts],
+    }));
+
+  replaceAccount = account =>
+    this.setState(state => ({
+      ...state,
+      accounts: [
+        account,
+        ...state.accounts.filter(
+          stateAccount => stateAccount.id !== account.id,
+        ),
+      ],
+    }));
+
+  removeAccount = id =>
+    this.setState(state => ({
+      ...state,
+      accounts: state.accounts.filter(account => account.id !== id),
+    }));
+
   render() {
-    const { loading, accounts } = this.state;
-    console.tron.log(loading);
+    const {
+      loading,
+      showModal,
+      modalAccountId,
+      modalIsCreatorType,
+      accounts,
+    } = this.state;
 
     if (!loading && !accounts.length)
       return (
@@ -85,12 +123,46 @@ export default class Dashboard extends Component {
 
     if (!loading && accounts.length) {
       return (
-        <AccountContainer>
-          <Button className="button" text="Add account" />
-          {accounts.map(({ id, service, label, username }) => (
-            <Account key={id} details={{ service, label, username }} />
-          ))}
-        </AccountContainer>
+        <>
+          <AccountDataModal
+            id={modalAccountId}
+            show={showModal}
+            hide={() =>
+              this.setState(state => ({ ...state, showModal: false }))
+            }
+            addAccount={this.addAccount}
+            replaceAccount={this.replaceAccount}
+            removeAccount={this.removeAccount}
+            isCreator={modalIsCreatorType}
+          />
+          <AccountContainer>
+            <Button
+              className="button"
+              text="Add account"
+              onClick={() =>
+                this.setState(state => ({
+                  ...state,
+                  showModal: true,
+                  modalIsCreatorType: true,
+                }))
+              }
+            />
+            {accounts.map(({ id, service, label, username }) => (
+              <Account
+                key={id}
+                details={{ service, label, username }}
+                onClick={() =>
+                  this.setState(state => ({
+                    ...state,
+                    showModal: true,
+                    modalAccountId: id,
+                    modalIsCreatorType: false,
+                  }))
+                }
+              />
+            ))}
+          </AccountContainer>
+        </>
       );
     }
 
