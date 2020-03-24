@@ -29,8 +29,8 @@
           "/^(react|redux)/",
           ["module", "/^@/"],
           ["sibling", "index", "/^~.(?!components)/"],
-          "/^~.components/",
-          "/..styles/"
+          ["/^~.components/", "/^..components/"],
+          ["/..styles/"]
         ],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
