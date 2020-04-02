@@ -18,6 +18,7 @@ import {
   Modal,
   ModalCloseButtonWrapper,
   ShowSensitiveDataButton,
+  DeleteButton,
   LoadingContainer,
   Overlay,
 } from './styles';
@@ -110,6 +111,13 @@ export default function AccountDataModal({
     hide();
   }
 
+  async function handleAccountDelete() {
+    await api.delete(`accounts/${id}`);
+
+    removeAccount(id);
+    hide();
+  }
+
   useEffect(() => {
     if (show) setLoading(true);
   }, [show]);
@@ -156,6 +164,11 @@ export default function AccountDataModal({
                   />
                 )}
                 <Button text="Save" loading={submitLoading} isSubmit />
+                {!isCreator && (
+                  <DeleteButton type="button" onClick={handleAccountDelete}>
+                    Delete
+                  </DeleteButton>
+                )}
               </Form>
             )}
             {loading && !isCreator && (

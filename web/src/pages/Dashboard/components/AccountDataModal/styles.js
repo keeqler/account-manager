@@ -89,6 +89,13 @@ export const ShowSensitiveDataButton = styled(Button)`
   font-size: 16px;
 `;
 
+export const DeleteButton = styled.button`
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--error);
+  cursor: pointer;
+`;
+
 export const LoadingContainer = styled.div`
   width: 100%;
   display: flex;
