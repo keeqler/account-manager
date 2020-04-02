@@ -26,9 +26,11 @@
       {
         "newlinesBetween": "always",
         "groups": [
+          "/styled-components/",
           "/^(react|redux)/",
           ["module", "/^@/"],
-          ["sibling", "index", "/^~.(?!components)/"],
+          ["sibling", "index", "/^~.(?!components|assets)/"],
+          "/^~.assets/",
           ["/^~.components/", "/^..components/"],
           ["/..styles/"]
         ],
