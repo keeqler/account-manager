@@ -8,9 +8,9 @@ export const signInRequest = (email, password) => ({
   payload: { email, password },
 });
 
-export const signInSuccess = (token, displayName) => ({
+export const signInSuccess = (token, email, displayName) => ({
   type: '@auth/SIGN_IN_SUCCESS',
-  payload: { token, displayName },
+  payload: { token, email, displayName },
 });
 
 export const signOut = () => ({

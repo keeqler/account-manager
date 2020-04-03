@@ -26,6 +26,7 @@ export function* signUp({ payload }) {
 
 export function* signIn({ payload }) {
   const { email, password } = payload;
+
   try {
     yield put(showLoading());
 
@@ -35,7 +36,7 @@ export function* signIn({ payload }) {
     })).data;
 
     yield put(hideLoading());
-    yield put(signInSuccess(token, email.split('@')[0]));
+    yield put(signInSuccess(token, email, email.split('@')[0]));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
 

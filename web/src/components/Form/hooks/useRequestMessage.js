@@ -12,7 +12,7 @@ export default () => {
   function _setMessage(id, text, isError = false) {
     clearTimeout(message.timeoutId);
 
-    setMessage({ ...message, show: false });
+    if (message.show) setMessage({ ...message, show: false });
 
     const timeoutId = setTimeout(
       () => setMessage({ ...message, id, show: false, text, isError }),

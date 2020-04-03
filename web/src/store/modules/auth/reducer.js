@@ -3,22 +3,20 @@ import produce from 'immer';
 const INITIAL_STATE = { token: null, displayName: null };
 
 export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case '@auth/SIGN_IN_SUCCESS':
-      return produce(state, draft => {
-        const { token, displayName } = action.payload;
+  return produce(state, draft => {
+    switch (action.type) {
+      case '@auth/SIGN_IN_SUCCESS':
+        draft.token = action.payload.token;
+        draft.email = action.payload.email;
+        draft.displayName = action.payload.displayName;
+        break;
 
-        draft.token = token;
-        draft.displayName = displayName;
-      });
-
-    case '@auth/SIGN_OUT':
-      return produce(state, draft => {
+      case '@auth/SIGN_OUT':
         draft.token = null;
         draft.displayName = null;
-      });
+        break;
 
-    default:
-      return state;
-  }
+      default:
+    }
+  });
 };
