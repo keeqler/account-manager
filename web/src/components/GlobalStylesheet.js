@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
-
   :root {
     --brand-gradient: linear-gradient(to right, #ea3535, #232d45);
     --primary: #566da5;
