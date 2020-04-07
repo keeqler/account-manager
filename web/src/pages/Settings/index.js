@@ -1,18 +1,14 @@
 import React from 'react';
 import { useStore } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import * as Yup from 'yup';
 
 import api from '~/services/api';
 import { signOut } from '~/store/modules/auth/actions';
-import {
-  showLoading,
-  hideLoading,
-  showMessage,
-} from '~/store/modules/form/actions';
+import { showLoading, hideLoading } from '~/store/modules/form/actions';
 
 import Form from '~/components/Form';
-import FormRequestMessage from '~/components/FormRequestMessage';
 import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput';
 
@@ -48,9 +44,7 @@ export default function Settings() {
 
     if (data.newEmail === email) delete data.newEmail;
     if (!data.newEmail && !data.newPassword) {
-      store.dispatch(
-        showMessage('You must edit either e-mail address or password', true),
-      );
+      toast.error('You must edit either e-mail address or password');
 
       return;
     }
@@ -60,11 +54,10 @@ export default function Settings() {
 
       await api.put('users', data);
 
-      store.dispatch(showMessage('Settings updated! You must re-login.'));
-
-      setTimeout(() => store.dispatch(signOut()), 2000);
+      toast.success('Settings updated! You must re-login.');
+      store.dispatch(signOut());
     } catch (error) {
-      store.dispatch(showMessage(error.response.data.error.msg, true));
+      toast.error(error.response.data.error.msg);
     }
 
     store.dispatch(hideLoading());
@@ -83,7 +76,6 @@ export default function Settings() {
         />
         <TextInput name="password" placeholder="Current password*" isPassword />
         <SubmitButton text="Edit" isSubmit />
-        <FormRequestMessage />
       </Form>
     </Container>
   );

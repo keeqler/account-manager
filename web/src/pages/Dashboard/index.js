@@ -14,8 +14,8 @@ import {
 } from './styles';
 
 export default class Dashboard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       loading: true,
@@ -104,6 +104,13 @@ export default class Dashboard extends Component {
       accounts: state.accounts.filter(account => account.id !== id),
     }));
 
+  showCreatorModal = () =>
+    this.setState(state => ({
+      ...state,
+      showModal: true,
+      modalIsCreatorType: true,
+    }));
+
   render() {
     const {
       loading,
@@ -113,39 +120,42 @@ export default class Dashboard extends Component {
       accounts,
     } = this.state;
 
-    if (!loading && !accounts.length)
+    if (loading)
       return (
-        <NoAccountContainer>
-          <h1>There are no accounts</h1>
-          <Button text="Add account" />
-        </NoAccountContainer>
+        <LoadingContainer>
+          <LoadingButton className="button" text="" />
+          <Account loading />
+          <Account loading />
+          <Account loading />
+          <Account loading />
+          <Account loading />
+          <Account loading />
+        </LoadingContainer>
       );
 
-    if (!loading && accounts.length) {
-      return (
-        <>
-          <AccountDataModal
-            id={modalAccountId}
-            show={showModal}
-            hide={() =>
-              this.setState(state => ({ ...state, showModal: false }))
-            }
-            addAccount={this.addAccount}
-            replaceAccount={this.replaceAccount}
-            removeAccount={this.removeAccount}
-            isCreator={modalIsCreatorType}
-          />
+    return (
+      <>
+        <AccountDataModal
+          id={modalAccountId}
+          show={showModal}
+          hide={() => this.setState(state => ({ ...state, showModal: false }))}
+          addAccount={this.addAccount}
+          replaceAccount={this.replaceAccount}
+          removeAccount={this.removeAccount}
+          isCreator={modalIsCreatorType}
+        />
+        {!loading && !accounts.length && (
+          <NoAccountContainer>
+            <h1>There are no accounts</h1>
+            <Button text="Add account" onClick={this.showCreatorModal} />
+          </NoAccountContainer>
+        )}
+        {!loading && !!accounts.length && (
           <AccountContainer>
             <Button
               className="button"
               text="Add account"
-              onClick={() =>
-                this.setState(state => ({
-                  ...state,
-                  showModal: true,
-                  modalIsCreatorType: true,
-                }))
-              }
+              onClick={this.showCreatorModal}
             />
             {accounts.map(({ id, service, label, username }) => (
               <Account
@@ -162,20 +172,8 @@ export default class Dashboard extends Component {
               />
             ))}
           </AccountContainer>
-        </>
-      );
-    }
-
-    return (
-      <LoadingContainer>
-        <LoadingButton className="button" text="" />
-        <Account loading />
-        <Account loading />
-        <Account loading />
-        <Account loading />
-        <Account loading />
-        <Account loading />
-      </LoadingContainer>
+        )}
+      </>
     );
   }
 }

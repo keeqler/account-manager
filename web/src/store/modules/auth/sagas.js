@@ -1,10 +1,11 @@
+import { toast } from 'react-toastify';
 import { call, put, all, takeLatest } from 'redux-saga/effects';
 
 import { signInSuccess } from './actions';
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { showMessage, showLoading, hideLoading } from '../form/actions';
+import { showLoading, hideLoading } from '../form/actions';
 
 export function* signUp({ payload }) {
   const { email, password } = payload;
@@ -13,14 +14,13 @@ export function* signUp({ payload }) {
     yield put(showLoading());
     yield call(api.post, 'users', { email, password });
     yield put(hideLoading());
-    yield put(
-      showMessage('Successfully registered! Redirecting to login page...'),
-    );
 
-    setTimeout(() => history.push('/'), 3300);
+    toast.success('Successfully registered! Now you can login.');
+    history.push('/');
   } catch ({ response: { data: responseData } }) {
     yield put(hideLoading());
-    yield put(showMessage(responseData.error.msg, true));
+
+    toast.error(responseData.error.msg);
   }
 }
 
@@ -43,7 +43,8 @@ export function* signIn({ payload }) {
     history.push('/dashboard');
   } catch ({ response: { data } }) {
     yield put(hideLoading());
-    yield put(showMessage(data.error.msg, true));
+
+    toast.error(data.error.msg);
   }
 }
 
@@ -60,12 +61,14 @@ export function* forgotPassword({ payload }) {
     yield put(showLoading());
     yield call(api.post, `password_recovery/${email}`);
     yield put(hideLoading());
-    yield put(showMessage('A code has been sent to your e-mail address'));
 
-    setTimeout(() => history.push(`/passwordreset/${email}`), 3300);
+    toast.success('A code has been sent to your e-mail address');
+
+    history.push(`/passwordreset/${email}`);
   } catch ({ response: { data: responseData } }) {
     yield put(hideLoading());
-    yield put(showMessage(responseData.error.msg, true));
+
+    toast.error(responseData.error.msg);
   }
 }
 
@@ -79,14 +82,13 @@ export function* passwordReset({ payload }) {
       password,
     });
     yield put(hideLoading());
-    yield put(
-      showMessage('Password successfully reset! Redirecting to login page...'),
-    );
 
-    setTimeout(() => history.push('/'), 3300);
+    toast.success('Password successfully reset! Redirecting to login page...');
+    history.push('/');
   } catch ({ response: { data: responseData } }) {
     yield put(hideLoading());
-    yield put(showMessage(responseData.error.msg, true));
+
+    toast.error(responseData.error.msg);
   }
 }
 

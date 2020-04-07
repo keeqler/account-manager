@@ -1,40 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useStore } from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import useRequestMessage from './hooks/useRequestMessage';
 import { FormContext } from '~/Contexts';
 
 import Container from './styles';
 
-export default function Form({ children, schema, initialData, onSubmit }) {
-  const store = useStore();
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useRequestMessage();
-
-  useEffect(() =>
-    store.subscribe(() => {
-      const { form } = store.getState();
-
-      if (loading !== form.loading) setLoading(form.loading);
-      if (message.id !== form.message.id)
-        setMessage(form.message.id, form.message.text, form.message.isError);
-    }),
-  );
-
-  useEffect(
-    () => () => {
-      clearTimeout(message.timeoutId);
-
-      store.dispatch({ type: '@form/RESET_MESSAGE_ID' });
-    },
-    [store, message.timeoutId],
-  );
-
+function Form({ children, schema, initialData, onSubmit, loading }) {
   return (
     <Container schema={schema} initialData={initialData} onSubmit={onSubmit}>
-      <FormContext.Provider value={{ loading, requestMessage: message }}>
+      <FormContext.Provider value={{ loading }}>
         {children}
       </FormContext.Provider>
     </Container>
@@ -47,8 +23,15 @@ Form.propTypes = {
   schema: PropTypes.object.isRequired,
   initialData: PropTypes.objectOf(PropTypes.string),
   onSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 Form.defaultProps = {
   initialData: {},
 };
+
+const mapStateToProps = state => ({
+  loading: state.form.loading,
+});
+
+export default connect(mapStateToProps)(Form);

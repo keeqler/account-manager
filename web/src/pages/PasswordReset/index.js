@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 import { passwordReset } from '~/store/modules/auth/actions';
 
 import Form from '~/components/Form';
-import RequestMessage from '~/components/FormRequestMessage';
 import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput';
 
@@ -53,7 +52,6 @@ export default function PasswordReset({ match: { params } }) {
           isPassword
         />
         <SubmitButton text="Reset password" />
-        <RequestMessage />
         <span className="last-link-container">
           Reminded your password?{' '}
           <Link className="link" to="/">

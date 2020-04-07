@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import { signInRequest } from '~/store/modules/auth/actions';
 
 import Form from '~/components/Form';
-import RequestMessage from '~/components/FormRequestMessage';
 import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput';
 
@@ -42,7 +41,6 @@ export default () => {
         />
         <Link to="/forgotpassword">I forgot my password</Link>
         <SubmitButton text="Login" />
-        <RequestMessage />
         <span className="last-link-container">
           Don&apos;t have an account? <Link to="/register">Register now</Link>
         </span>

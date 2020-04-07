@@ -1,5 +1,6 @@
-import { Form } from '@rocketseat/unform';
 import styled from 'styled-components';
+
+import { Form } from '@rocketseat/unform';
 
 export default styled(Form)`
   display: flex;
@@ -12,7 +13,7 @@ export default styled(Form)`
   }
 
   button {
-    margin-top: 10px;
+    margin: 10px 0;
   }
 
   .text-input {

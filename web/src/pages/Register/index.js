@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import { signUpRequest } from '~/store/modules/auth/actions';
 
 import Form from '~/components/Form';
-import RequestMessage from '~/components/FormRequestMessage';
 import SubmitButton from '~/components/FormSubmitButton';
 import TextInput from '~/components/TextInput';
 
@@ -46,7 +45,6 @@ export default () => {
           isPassword
         />
         <SubmitButton text="Register" />
-        <RequestMessage />
         <span className="last-link-container">
           Already have an account?{' '}
           <Link className="link" to="/">
