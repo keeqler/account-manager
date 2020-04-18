@@ -47,7 +47,10 @@ Open up your terminal and clone this repo with the following command:
 $ git clone http://github.com/keeqler/account-manager
 ```
 
-### Running the API and the React web app
+In the `api` directory, set the environment variables by creating a `.env` file
+based on the existing `.env.example` file.
+
+### Running
 
 In the project's directory root, run:
 
@@ -55,4 +58,5 @@ In the project's directory root, run:
 $ docker-compose up -d
 ```
 
-You can now access `localhost:3000` in your browser.
+You will be able access the React app at `localhost:3000` and the API at
+`localhost:3333`.
