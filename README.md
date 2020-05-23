@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/keeqler/account-manager/blob/master/web/src/assets/logo.png?raw=true" width="100px"></p>
 <h1 align="center">Account Manager</h1>
-<p align="center">A web app where you can store all your accounts data and see them anytime. This is a result of a self-taught learning on NodeJS</p>
+<p align="center">An password managing application where you can store your accounts credentials including usernames, passwords and 2FA secrets.</p>
 
 # Screenshots
 
