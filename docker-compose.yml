@@ -27,7 +27,7 @@ services:
       - redis
 
   postgres:
-    image: postgres:alpine
+    image: postgres
     environment:
       - POSTGRES_PASSWORD=777
     ports:
